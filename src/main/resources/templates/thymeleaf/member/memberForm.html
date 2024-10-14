@@ -8,7 +8,7 @@
 <form action="memberRegist" method="post">
     <table border="1">
         <tr>
-            <td>회원번호 : <input type="text" name="memberNum" /></td>
+            <td>회원번호 : <input type="text" name="memberNum" th:value="${autoNum}" readonly="readonly"/>자동부여</td>
         </tr>
         <tr>
             <td>회원이름 : <input type="text" name="memberName" /></td>
