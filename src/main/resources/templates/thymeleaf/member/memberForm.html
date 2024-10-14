@@ -20,7 +20,10 @@
             <td>회원비밀번호 : <input type="password" name="memberPw" /></td>
         </tr>
         <tr>
-            <td>회원비밀번호 확인 : <input type="password" name="memberPwCon" /></td>
+            <td>
+                회원비밀번호 확인 : <input type="password" name="memberPwCon" />
+                <span>[[${errPw}]]</span>
+            </td>
         </tr>
         <tr>
             <td>회원주소 : <input type="text" name="memberAddr" id="sample4_roadAddress" required="required" readonly="readonly"/> <button type="button" onclick="execDaumPostcode();">우편번호 검색</button></td>
