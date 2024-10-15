@@ -1,5 +1,6 @@
 package springbootmvcshopping.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,10 @@ import springbootmvcshopping.service.member.MemberWriteService;
 
 @Controller
 @RequestMapping("member")
+@RequiredArgsConstructor
 //절대주소로 앞에 붙던 member을 굳이 사용하지 않아도 됨
 public class MemberController {
-    @Autowired
-    MemberWriteService memberWriteService;
+    private final MemberWriteService memberWriteService;
     @Autowired
     MemberListService memberListService;
 
@@ -28,8 +29,9 @@ public class MemberController {
 
     //@GetMapping("member/memberList") 앞에 붙던 절대주소 member를 사용하지 않아도 됨
     @GetMapping("memberList")
-    public String list(Model model,@RequestParam(value = "searchWord", required = false) String searchWord) {
-        memberListService.execute(model, searchWord);
+    public String list(Model model,@RequestParam(value = "searchWord", required = false) String searchWord,
+                       @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+        memberListService.execute(searchWord, page, model);
         //return "member/memberList"; jsp 사용
         return "thymeleaf/member/memberList"; //html 사용
     }

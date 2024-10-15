@@ -18,15 +18,23 @@
         MEMBER_PHONE1, MEMBER_PHONE2, MEMBER_EMAIL, MEMBER_BIRTH, MEMBER_POINT, MEMBER_EMAIL_CONFIRM
     </sql>
 
-    <select id="memberSelectList" resultType="memberDTO">
-        select <include refid="memberBaseColumns"></include>
-        from members
+    <select id="memberSelectList" resultType="memberDTO" parameterType="startEndPageDTO">
+        select * from
+        (select row_number() over (order by member_num asc ) as rn,
+        <include refid="memberBaseColumns" /> from members
         <where>
             <if test="searchWord != null">
                 MEMBER_NAME like '%'||#{searchWord}||'%'
-                or member_id like '%'||#{searchWord}||'%'
-                or member_num like '%'||#{searchWord}||'%'
+                or MEMBER_ID like '%'||#{searchWord}||'%'
+                or MEMBER_NUM like '%'||#{searchWord}||'%'
             </if>
         </where>
+        )
+        where rn between #{startRow} and #{endRow}
     </select>
+
+    <select id="memberCount" resultType="integer">
+        select count(*) from members
+    </select>
+
 </mapper>
