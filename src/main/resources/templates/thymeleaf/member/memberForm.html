@@ -6,6 +6,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/static/js/daumAddressScript.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#userId").on("change keyup",function(){
+                $.ajax({
+                    type : "post",
+                    url : "/login/userIdCheck",
+                    data : {"userId" : $("#userId").val()},
+                    dataType : "text",
+                    success : function(result){
+                        if(result == "1"){
+                            $("#idCheck").text("사용중인 아이디입니다.");
+                            $("#idCheck").css("color","red");
+                        }else{
+                            $("#idCheck").text("사용가능한 아이디입니다.");
+                            $("#idCheck").css("color","blue");
+                        }
+                    },
+                    error:function(){
+                        alert("서버오류");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <form action="memberRegist" method="post" th:object="${memberCommand}">
@@ -24,6 +48,7 @@
         <tr>
             <td>
                 회원아이디 : <input type="text" name="memberId" id="userId" th:value="${memberCommand.memberId}" />
+                <span id="idCheck"></span>
                 <span style="color: red" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span>
             </td>
         </tr>
