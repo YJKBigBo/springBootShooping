@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/checkBox.js"></script>
 <body>
     <a href="memberWrite">회원등록</a><br />
 <!--앞에 member은 그대로 뒤 주소만 바뀜-->
@@ -12,7 +14,7 @@
     <table border="1" width="600">
         <form action="memberList" method="get">
             <tr>
-                <td colspan="4">
+                <td colspan="6">
                     회원 검색 :
                     <input type="search" name="searchWord" size="60" th:value="${searchWord}"/>
                     <input type="submit" value="검색" />
@@ -28,15 +30,16 @@
                 <td>등록일</td>
                 <td><button type="submit">선택 삭제</button></td>
             </tr>
+
+            <tr th:each = "dto : ${list}">
+                <td><input type="checkbox" name="nums" th:value="${dto.memberNum}"/></td>
+                <td>[[${dto.memberNum}]]</td>
+                <td>[[${dto.memberName}]]</td>
+                <td>[[${dto.memberId}]]</td>
+                <td>[[${#dates.format(dto.memberRegist,'yyyy-MM-dd')}]]</td>
+                <td><button type="button" th:attr="onclick=|javascript:Location.href='membersDelete?nums=${dto.memberNum}'|">삭제</button></td>
+            </tr>
         </form>
-        <tr th:each = "dto : ${list}">
-            <td>[[${dto.memberNum}]]</td>
-            <td>[[${dto.memberName}]]</td>
-            <td>[[${dto.memberId}]]</td>
-            <td>[[${#dates.format(dto.memberRegist,'yyyy-MM-dd')}]]</td>
-            <td></td>
-            <td></td>
-        </tr>
         <tr>
             <th colspan="6">
                 <span th:if="${page == 1}">

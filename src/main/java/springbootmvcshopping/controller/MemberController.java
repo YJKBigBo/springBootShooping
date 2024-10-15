@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import springbootmvcshopping.command.MemberCommand;
 import springbootmvcshopping.service.AutoNumService;
+import springbootmvcshopping.service.member.MemberDeleteService;
 import springbootmvcshopping.service.member.MemberListService;
 import springbootmvcshopping.service.member.MemberWriteService;
 
@@ -26,6 +27,9 @@ public class MemberController {
 
     @Autowired
     AutoNumService autoNumService;
+
+    @Autowired
+    MemberDeleteService memberDeleteService;
 
     //@GetMapping("member/memberList") 앞에 붙던 절대주소 member를 사용하지 않아도 됨
     @GetMapping("memberList")
@@ -59,6 +63,13 @@ public class MemberController {
             return "thymeleaf/member/memberForm";
         }
         memberWriteService.execute(memberCommand);
+        return "redirect:memberList";
+    }
+
+    @RequestMapping("membersDelete")
+    //public String membersDelete(String nums[])로 사용이 가능하다.
+    public String membersDelete(@RequestParam("nums") String memberNums[]){
+        memberDeleteService.execute(memberNums);
         return "redirect:memberList";
     }
 }
