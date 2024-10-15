@@ -35,7 +35,6 @@ public class MemberCommand {
     @Size(min = 11, max = 23)
     String memberPhone1;
 
-    @Size(min = 11, max = 23)
     String memberPhone2;
 
     String memberGender;
