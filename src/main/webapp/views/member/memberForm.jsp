@@ -26,7 +26,7 @@
             <td>회원비밀번호 확인 : <input type="password" name="memberPwCon" /></td>
         </tr>
         <tr>
-            <td>회원주소 : <input type="text" name="memberAddr" id="sample4_roadAddress" required="required" readonly="readonly"/> <button type="button" onclick="execDaumPostcode();">우편번호 검색</button></td>
+            <td>회원주소 : <input type="text" name="memberAddr" id="sample4_roadAddress" required="required" readonly="readonly"zz/> <button type="button" onclick="execDaumPostcode();">우편번호 검색</button></td>
         </tr>
         <tr>
             <td>상세주소 : <input type="text" name="memberAddrDetail" /></td>

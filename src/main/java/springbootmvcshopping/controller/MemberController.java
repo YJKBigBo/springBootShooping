@@ -8,8 +8,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import springbootmvcshopping.command.MemberCommand;
 import springbootmvcshopping.service.AutoNumService;
+import springbootmvcshopping.service.member.MemberListService;
 import springbootmvcshopping.service.member.MemberWriteService;
 
 @Controller
@@ -18,13 +20,16 @@ import springbootmvcshopping.service.member.MemberWriteService;
 public class MemberController {
     @Autowired
     MemberWriteService memberWriteService;
+    @Autowired
+    MemberListService memberListService;
 
     @Autowired
     AutoNumService autoNumService;
 
     //@GetMapping("member/memberList") 앞에 붙던 절대주소 member를 사용하지 않아도 됨
     @GetMapping("memberList")
-    public String list(){
+    public String list(Model model,@RequestParam(value = "searchWord", required = false) String searchWord) {
+        memberListService.execute(model, searchWord);
         //return "member/memberList"; jsp 사용
         return "thymeleaf/member/memberList"; //html 사용
     }

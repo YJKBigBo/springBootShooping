@@ -19,8 +19,8 @@ public class MemberCommand {
     @NotEmpty(message = "아이디를 입력해주세요.")
     String memberId;
 
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
-            message = "영문자와 숫자 그리고 특수문자가 포함된 8글자 이상")
+//    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
+    @NotEmpty(message = "영문자와 숫자 그리고 특수문자가 포함된 8글자 이상")
     String memberPw;
 
     @NotBlank(message = "비밀번호 확인을 입력해주세요.")
