@@ -78,4 +78,11 @@ public class EmployeeController {
         employeeUpdateService.execute(employeeCommand);
         return "redirect:employeeList";
     }
+
+    @GetMapping("employeeDelete/{empNum}")
+    public String employeeDelete(@PathVariable("empNum") String[] empNum){
+        employeeDeleteService.execute(empNum);
+        return "redirect:../employeeList";
+    }
+
 }
