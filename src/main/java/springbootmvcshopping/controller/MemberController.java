@@ -6,13 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import springbootmvcshopping.command.MemberCommand;
 import springbootmvcshopping.service.AutoNumService;
 import springbootmvcshopping.service.member.MemberDeleteService;
+import springbootmvcshopping.service.member.MemberDetailService;
 import springbootmvcshopping.service.member.MemberListService;
 import springbootmvcshopping.service.member.MemberWriteService;
 
@@ -30,6 +28,9 @@ public class MemberController {
 
     @Autowired
     MemberDeleteService memberDeleteService;
+
+    @Autowired
+    MemberDetailService memberDetailService;
 
     //@GetMapping("member/memberList") 앞에 붙던 절대주소 member를 사용하지 않아도 됨
     @GetMapping("memberList")
@@ -71,5 +72,11 @@ public class MemberController {
     public String membersDelete(@RequestParam("nums") String memberNums[]){
         memberDeleteService.execute(memberNums);
         return "redirect:memberList";
+    }
+
+    @GetMapping("memberDetail/{memberNum}")
+    public String memberDetail(@PathVariable("memberNum") String memberNum, Model model){
+        memberDetailService.execute(model, memberNum);
+        return "thymeleaf/member/memberInfo";
     }
 }

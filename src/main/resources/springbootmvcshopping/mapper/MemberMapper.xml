@@ -37,4 +37,8 @@
         select count(*) from members
     </select>
 
+    <select id="memberSelectOne" resultType="memberDTO" parameterType="string">
+        select <include refid="memberBaseColumns"></include> from members where member_num = #{memberNum}
+    </select>
+
 </mapper>
