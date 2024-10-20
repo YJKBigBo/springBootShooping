@@ -15,4 +15,8 @@
         select <include refid="empBaseColumn"></include> from employees
     </select>
 
+    <insert id="employeeInsert" parameterType="EmployeeDTO">
+        insert into employees (EMP_NUM, EMP_ID, EMP_PW, EMP_NAME, EMP_ADDR, EMP_ADDR_DETAIL, EMP_POST, EMP_PHONE, EMP_JUMIN, EMP_EMAIL, EMP_HIRE_DATE, EMP_IMAGE) values (#{empNum}, #{empId}, #{empPw}, #{empName}, #{empAddr}, #{empAddrDetail}, #{empPost}, #{empPhone}, #{empJumin}, #{empEmail}, sysdate, null)
+    </insert>
+
 </mapper>

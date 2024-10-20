@@ -10,4 +10,5 @@ import java.util.List;
 public interface EmployeeMapper {
     public Integer employeeCount();
     public List<EmployeeDTO> employeeSelectList(StartEndPageDTO sepDTO);
+    public void employeeInsert(EmployeeDTO employeeDTO);
 }
