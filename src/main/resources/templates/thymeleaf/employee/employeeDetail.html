@@ -16,7 +16,7 @@
 연락처 : [[${employeeCommand.empPhone }]]<br />
 입사일 : [[${employeeCommand.empHireDate }]]<br />
 이메일 : [[${employeeCommand.empEmail }]]<br />
-<a th:href="@{../employeeUpdate(employeeNum=${employeeCommand.empNum })}">회원 수정</a> |
+<a th:href="@{../employeeUpdate(empNum=${employeeCommand.empNum})}">회원 수정</a> |
 <a th:href="|../employeeDelete/*{empNum}|">회원 강제 탈퇴</a> |
 <a href="../employeeList">회원목록</a>
 </body>

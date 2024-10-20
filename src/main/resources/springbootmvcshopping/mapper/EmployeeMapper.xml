@@ -8,7 +8,7 @@
     </select>
 
     <sql id="empBaseColumn">
-        EMP_NUM, EMP_ID, EMP_PW, EMP_NAME, EMP_ADDR, EMP_ADDR_DETAIL, EMP_POST, EMP_PHONE, EMP_JUMIN, EMP_EMAIL, EMP_HIRE_DATE, EMP_IMAGE
+        EMP_NUM, EMP_ID, EMP_PW, EMP_NAME, EMP_ADDR, EMP_ADDR_DETAIL, EMP_POST, EMP_PHONE, EMP_JUMIN, EMP_EMAIL, EMP_HIRE_DATE
     </sql>
 
     <select id="employeeSelectList" resultType="EmployeeDTO" parameterType="startEndPageDTO">
@@ -22,5 +22,20 @@
     <select id="employeeSelectOne" parameterType="string" resultType="EmployeeDTO">
         select <include refid="empBaseColumn"></include> from employees where emp_num = #{empNum}
     </select>
+
+    <update id="employeeUpdate" parameterType="EmployeeDTO">
+        update employees
+        <set>
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="empId != null">emp_id = #{empId},</if>
+            <if test="empJumin != null">emp_Jumin = #{empJumin},</if>
+            <if test="empAddr != null">emp_addr = #{empAddr},</if>
+            <if test="empAddrDetail != null">emp_addr_detail = #{empAddrDetail},</if>
+            <if test="empPost != null">emp_post = #{empPost},</if>
+            <if test="empPhone != null">emp_phone = #{empPhone},</if>
+            <if test="empEmail != null">emp_email = #{empEmail},</if>
+        </set>
+        where emp_num = #{empNum}
+    </update>
 
 </mapper>

@@ -8,10 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springbootmvcshopping.command.EmployeeCommand;
 import springbootmvcshopping.service.AutoNumService;
-import springbootmvcshopping.service.employee.EmployeeDeleteService;
-import springbootmvcshopping.service.employee.EmployeeDetailService;
-import springbootmvcshopping.service.employee.EmployeeListService;
-import springbootmvcshopping.service.employee.EmployeeWriteService;
+import springbootmvcshopping.service.employee.*;
 
 @Controller
 @RequestMapping("employee")
@@ -30,6 +27,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeDetailService employeeDetailService;
+
+    @Autowired
+    EmployeeUpdateService employeeUpdateService;
 
     @GetMapping("employeeList")
     public String employeeList(@RequestParam(value = "searchWord", required = false) String searchWord, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model){
@@ -65,5 +65,17 @@ public class EmployeeController {
     public String employeeDetail(@PathVariable("empNum") String empNum, Model model){
         employeeDetailService.execute(empNum, model);
         return "thymeleaf/employee/employeeDetail";
+    }
+
+    @GetMapping("employeeUpdate")
+    public String employeeUpdate(String empNum, Model model){
+        employeeDetailService.execute(empNum, model);
+        return "thymeleaf/employee/employeeModify";
+    }
+
+    @PostMapping("employeeUpdate")
+    public String employeeUpdate(EmployeeCommand employeeCommand){
+        employeeUpdateService.execute(employeeCommand);
+        return "redirect:employeeList";
     }
 }

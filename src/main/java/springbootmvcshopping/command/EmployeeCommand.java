@@ -1,10 +1,14 @@
 package springbootmvcshopping.command;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeCommand {
     String empNum;
     String empId;
@@ -12,7 +16,7 @@ public class EmployeeCommand {
     String empName;
     String empAddr;
     String empAddrDetail;
-    int empPost;
+    Integer empPost;
     String empPhone;
     String empJumin;
     String empEmail;

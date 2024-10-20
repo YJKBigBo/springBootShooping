@@ -12,4 +12,5 @@ public interface EmployeeMapper {
     public List<EmployeeDTO> employeeSelectList(StartEndPageDTO sepDTO);
     public void employeeInsert(EmployeeDTO employeeDTO);
     public EmployeeDTO employeeSelectOne(String empNum);
+    public void employeeUpdate(EmployeeDTO employeeDTO);
 }
