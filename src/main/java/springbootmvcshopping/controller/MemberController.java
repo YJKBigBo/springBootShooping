@@ -93,7 +93,7 @@ public class MemberController {
     }
 
     @GetMapping("memberDelete/{memberNum}")
-    public String memberDelete(@PathVariable("memberNum") String memberNum) {
+    public String memberDelete(@PathVariable("memberNum") String[] memberNum) {
         memberDeleteService.execute(memberNum);
         return "redirect:../memberList";
     }

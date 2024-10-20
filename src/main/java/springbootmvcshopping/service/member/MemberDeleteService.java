@@ -16,8 +16,4 @@ public class MemberDeleteService {
     public void execute(String memberNums[]){
         autoNumMapper.numsDelete(memberNums, "members", "member_num");
     }
-
-    public void execute(String memberNum) {
-        memberMapper.memberDelete(memberNum);
-    }
 }
