@@ -36,13 +36,13 @@
         <th colspan="6">
             <span th:if="${page <= 1}">[이전]</span>
             <span th:if="${page > 1}">
-			<a th:href="|memberList?page=${page - 1}&searchWord=${searchWord}|">[이전]</a>
+			<a th:href="|employeeList?page=${page - 1}&searchWord=${searchWord}|">[이전]</a>
 		</span>   									<!-- 1,          10  -->
             <th:block th:each=" i : ${#numbers.sequence(startPageNum, endPageNum)}">
-                [<a th:href="|memberList?page=${i}&searchWord=${searchWord}|">[[${i}]]</a>]
+                [<a th:href="|employeeList?page=${i}&searchWord=${searchWord}|">[[${i}]]</a>]
             </th:block>
             <span th:if="${page < maxPage}">
-			<a th:href="@{memberList(page=${page + 1},searchWord=${searchWord})}">[다음]</a>
+			<a th:href="@{employeeList(page=${page + 1},searchWord=${searchWord})}">[다음]</a>
 		</span>
             <span th:if="${page >= maxPage}">
 			[다음]

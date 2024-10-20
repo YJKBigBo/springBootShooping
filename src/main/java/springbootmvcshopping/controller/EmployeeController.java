@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import springbootmvcshopping.command.EmployeeCommand;
 import springbootmvcshopping.service.AutoNumService;
+import springbootmvcshopping.service.employee.EmployeeDeleteService;
 import springbootmvcshopping.service.employee.EmployeeListService;
 import springbootmvcshopping.service.employee.EmployeeWriteService;
 
@@ -25,6 +26,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeWriteService employeeWriteService;
+
+    @Autowired
+    EmployeeDeleteService employeeDeleteService;
 
     @GetMapping("employeeList")
     public String employeeList(@RequestParam(value = "searchWord", required = false) String searchWord, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model){
@@ -47,6 +51,12 @@ public class EmployeeController {
             return "thymeleaf/employee/employeeForm";
         }
         employeeWriteService.execute(employeeCommand);
+        return "redirect:employeeList";
+    }
+
+    @RequestMapping("employeesDelete")
+    public String employeesDelete(@RequestParam("nums") String employeesNums[]){
+        employeeDeleteService.execute(employeesNums);
         return "redirect:employeeList";
     }
 }
