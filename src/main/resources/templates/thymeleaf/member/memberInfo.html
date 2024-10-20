@@ -20,7 +20,7 @@
 생년월일 : [[${memberCommand.memberBirth }]]<br />
 이메일 : [[${memberCommand.memberEmail }]]<br />
 <a th:href="@{../memberUpdate(memberNum=${memberCommand.memberNum })}">회원 수정</a> |
-<a href="">회원 강제 탈퇴</a> |
+<a th:href="|../memberDelete/*{memberNum}|">회원 강제 탈퇴</a> |
 <a href="memberList">회원목록</a>
 </body>
 </html>
