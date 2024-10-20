@@ -5,13 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import springbootmvcshopping.command.EmployeeCommand;
 import springbootmvcshopping.service.AutoNumService;
 import springbootmvcshopping.service.employee.EmployeeDeleteService;
+import springbootmvcshopping.service.employee.EmployeeDetailService;
 import springbootmvcshopping.service.employee.EmployeeListService;
 import springbootmvcshopping.service.employee.EmployeeWriteService;
 
@@ -29,6 +27,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeDeleteService employeeDeleteService;
+
+    @Autowired
+    EmployeeDetailService employeeDetailService;
 
     @GetMapping("employeeList")
     public String employeeList(@RequestParam(value = "searchWord", required = false) String searchWord, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model){
@@ -58,5 +59,11 @@ public class EmployeeController {
     public String employeesDelete(@RequestParam("nums") String employeesNums[]){
         employeeDeleteService.execute(employeesNums);
         return "redirect:employeeList";
+    }
+
+    @GetMapping("empDetail/{empNum}")
+    public String employeeDetail(@PathVariable("empNum") String empNum, Model model){
+        employeeDetailService.execute(empNum, model);
+        return "thymeleaf/employee/employeeDetail";
     }
 }

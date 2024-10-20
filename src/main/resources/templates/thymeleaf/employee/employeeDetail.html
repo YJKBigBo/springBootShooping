@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+직원상세페이지입니다.<br />
+직원번호 : [[${employeeCommand.empNum }]]<br />
+이름 : [[${employeeCommand.empName }]]<br />
+아이디 : [[${employeeCommand.empId }]]<br />
+주민번호 : [[${employeeCommand.empJumin }]]<br />
+주소 : [[${employeeCommand.empAddr }]]<br />
+상세주소 : [[${employeeCommand.empAddrDetail }]]<br />
+우편번호 : [[${employeeCommand.empPost }]]<br />
+연락처 : [[${employeeCommand.empPhone }]]<br />
+입사일 : [[${employeeCommand.empHireDate }]]<br />
+이메일 : [[${employeeCommand.empEmail }]]<br />
+<a th:href="@{../employeeUpdate(employeeNum=${employeeCommand.empNum })}">회원 수정</a> |
+<a th:href="|../employeeDelete/*{empNum}|">회원 강제 탈퇴</a> |
+<a href="../employeeList">회원목록</a>
+</body>
+</html>
