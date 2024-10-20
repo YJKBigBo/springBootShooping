@@ -23,6 +23,7 @@ public class StartEndPageService {
         int startPageNum = (int)((double)page / limitPage - 0.05) * limitPage +1;
         int endPageNum = startPageNum + limitPage -1;
         int maxPage = (int)((double)count/ limit +0.95);
+        if(endPageNum == 0) endPageNum = 1;
         if(endPageNum > maxPage) {
             endPageNum = maxPage;
         }

@@ -6,30 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="/static/js/daumAddressScript.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $("#userId").on("change keyup",function(){
-                $.ajax({
-                    type : "post",
-                    url : "/login/userIdCheck",
-                    data : {"userId" : $("#userId").val()},
-                    dataType : "text",
-                    success : function(result){
-                        if(result == "1"){
-                            $("#idCheck").text("사용중인 아이디입니다.");
-                            $("#idCheck").css("color","red");
-                        }else{
-                            $("#idCheck").text("사용가능한 아이디입니다.");
-                            $("#idCheck").css("color","blue");
-                        }
-                    },
-                    error:function(){
-                        alert("서버오류");
-                    }
-                });
-            });
-        });
-    </script>
+    <script type="text/javascript" src="/static/js/check.js"></script>
 </head>
 <body>
 <form action="memberRegist" method="post" th:object="${memberCommand}">
@@ -101,7 +78,7 @@
         <tr>
             <td>
                 회원이메일 : <input type="email" name="memberEmail" th:value="${memberCommand.memberEmail}" />
-                <span style="color: red" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
+                <span style="color: red" id="userEamil" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
             </td>
         </tr>
     </table>
