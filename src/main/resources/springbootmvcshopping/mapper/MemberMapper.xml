@@ -69,4 +69,9 @@
         where MEMBER_NUM = #{memberNum}
     </update>
 
+    <delete id="memberDelete" parameterType="string">
+        delete from members
+        where member_num = #{memberNum}
+    </delete>
+
 </mapper>

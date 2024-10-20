@@ -91,4 +91,10 @@ public class MemberController {
         memberUpdateService.execute(memberCommand);
         return "redirect:memberDetail/"+memberCommand.getMemberNum();
     }
+
+    @GetMapping("memberDelete/{memberNum}")
+    public String memberDelete(@PathVariable("memberNum") String memberNum) {
+        memberDeleteService.execute(memberNum);
+        return "redirect:../memberList";
+    }
 }
