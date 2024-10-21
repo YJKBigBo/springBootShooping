@@ -9,22 +9,24 @@
     <div th:if="${session.auth != null}">
         <li><a href="member/memberList">회원목록</a></li>
         <li><a href="employee/employeeList">직원목록</a></li>
-        <li><a href="login/logout">로그아웃</a></li>
+        <li><a href="/login/logout">로그아웃</a></li>
     </div>
     <div th:if="${session.auth == null}">
-        <form action="login/login" method="post">
+        <form action="/login/login" method="post" th:object="${loginCommand}">
             <table border="1" align="center">
                 <tr>
                     <td colspan="2"> 자동로그인 | 아이디저장</td>
                 </tr>
 
                 <tr>
-                    <td>아이디 : <input type="text" name="userId" /></td>
+                    <td>아이디 : <input type="text" name="userId" /></td> <br />
+                    <spqn th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" th:value="${loginCommand.userId}"></spqn>
                     <td rowspan="2"><input type="image" src="/static/images/서머%20브리즈%20밀짚모자1.png" width="60px" height="60px" /></td>
                 </tr>
 
                 <tr>
-                    <td>비밀번호 : <input type="password" name="userPw" /></td>
+                    <td>비밀번호 : <input type="password" name="userPw" /></td> <br />
+                    <spqn th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></spqn>
                 </tr>
 
                 <tr>
