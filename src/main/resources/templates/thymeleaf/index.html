@@ -10,6 +10,7 @@
         <li><a href="member/memberList">회원목록</a></li>
         <li><a href="employee/employeeList">직원목록</a></li>
         <li><a href="/login/logout">로그아웃</a></li>
+        <li><a href="mailling">메일보내기 (테스트용)</a></li>
     </div>
     <div th:if="${session.auth == null}">
         <form action="/login/login" method="post" th:object="${loginCommand}">

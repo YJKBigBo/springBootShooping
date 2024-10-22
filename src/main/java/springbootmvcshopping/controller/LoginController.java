@@ -28,6 +28,7 @@ public class LoginController {
 
     @PostMapping("login")
     public String login(@Validated LoginCommand loginCommand, BindingResult bindingResult, HttpSession session) {
+        //BindingResult 위치가 매우 매우 중요함
         userLoginService.execute(loginCommand, session, bindingResult);
         if(bindingResult.hasErrors()) {
             return "thymeleaf/index"; // html 파일을 열어 값을 가져옴

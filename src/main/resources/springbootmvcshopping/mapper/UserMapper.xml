@@ -15,4 +15,5 @@
         #{memberAddrDetail}, #{memberPost}, sysdate, #{memberGender},
         #{memberPhone1}, #{memberPhone2}, #{memberEmail}, #{memberBirth}, 0)
     </insert>
+
 </mapper>

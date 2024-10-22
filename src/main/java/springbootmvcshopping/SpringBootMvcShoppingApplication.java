@@ -1,10 +1,14 @@
 package springbootmvcshopping;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import springbootmvcshopping.command.LoginCommand;
+import springbootmvcshopping.service.EmailSendService;
 
 @Controller
 @SpringBootApplication
@@ -21,6 +25,24 @@ public class SpringBootMvcShoppingApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMvcShoppingApplication.class, args);
+    }
+
+
+
+
+
+    @Autowired
+    EmailSendService emailSendService;
+
+    @GetMapping("mailling")
+    public String mail() {
+        return "thymeleaf/email";
+    }
+
+    @PostMapping("mailling")
+    public String mail(String fromEmail, String toEmail, String subject, String content) {
+        emailSendService.mailSend(fromEmail, toEmail, subject, content);
+        return "redirect:/";
     }
 
 }

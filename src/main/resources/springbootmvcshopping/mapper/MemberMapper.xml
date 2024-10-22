@@ -74,4 +74,8 @@
         where member_num = #{memberNum}
     </delete>
 
+    <update id="memberEmailCheckUpdate" parameterType="string">
+        update members set member_email_confirm = 'y' where member_email = #{memberEmail} and member_email_confirm is null
+    </update>
+
 </mapper>
