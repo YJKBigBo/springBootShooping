@@ -17,8 +17,8 @@ public class MemberPwUpdateService {
     public void execute(String oldPw, String newPw, HttpSession session) {
         AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
         if(passwordEncoder.matches(oldPw, auth.getUserPw())){
-            memberInfoMapper.memberPwUpdate(newPw, auth.getUserId());
             String pw = passwordEncoder.encode(newPw);
+            memberInfoMapper.memberPwUpdate(pw, auth.getUserId());
             auth.setUserPw(pw);
         }
     }
