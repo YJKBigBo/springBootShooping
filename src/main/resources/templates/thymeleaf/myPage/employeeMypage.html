@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>memberMyPage.jsp</title>
+</head>
+<body>
+<ul>
+    <li><a href="/">홈</a></li>
+    <li><a href="empMyPage">내 정보 보기</a></li>
+    <li><a href="empUpdate">내 정보 수정</a></li>
+    <li><a href="empPwUpdate">비밀번호 변경</a></li>
+    <li><a href="empDrop">회원 탈퇴</a></li>
+</ul>
+${dto}
+<table border="1">
+    <tr>
+        <td>직원번호 : [${employeeCommand.empNum}]</td>
+    </tr>
+    <tr>
+        <td>직원아이디 : [${employeeCommand.empId}]</td>
+    </tr>
+    <tr>
+        <td>직원비밀번호 : [${employeeCommand.empPw}]</td>
+    </tr>
+    <tr>
+        <td>직원이름 : [${employeeCommand.empName}]</td>
+    </tr>
+    <tr>
+        <td>직원주소 : [${employeeCommand.empAddr}]</td>
+    </tr>
+    <tr>
+        <td>직원상세주소 : [${employeeCommand.empAddrDetail}]</td>
+    </tr>
+    <tr>
+        <td>직원우편번호 : [${employeeCommand.empPost}]</td>
+    </tr>
+    <tr>
+        <td>직원전화번호 : [${employeeCommand.empPhone}]</td>
+    </tr>
+    <tr>
+        <td>직원주민번호 : [${employeeCommand.empJumin}]</td>
+    </tr>
+    <tr>
+        <td>직원이메일 : [${employeeCommand.empEmail}]</td>
+    </tr>
+    <tr>
+        <td>직원입사일 : [${employeeCommand.empHireDate}]</td>
+    </tr>
+</table>
+</body>
+</html>

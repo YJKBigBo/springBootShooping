@@ -5,13 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-    Hello<br/>
     <div th:if="${session.auth != null}">
-        <li><a href="myPage/memberMypage">내 정보 보기</a></li>
-        <li><a href="member/memberList">회원목록</a></li>
-        <li><a href="employee/employeeList">직원목록</a></li>
-        <li><a href="/login/logout">로그아웃</a></li>
-        <li><a href="mailling">메일보내기 (테스트용)</a></li>
+        <ul>
+            <th:block th:if="${session.auth.grade == 'emp'}">
+                <li><a href="member/memberList">회원관리</a></li>
+                <li><a href="employee/employeeList">직원 관리</a></li>
+                <li><a href="mailling">메일보내기</a></li>
+                <li><a href="myPage/empMyPage">내 정보 보기</a></li>
+            </th:block>
+
+            <th:block th:if="${session.auth.grade == 'mem'}">
+                <li><a href="myPage/memberMypage">내 정보 보기</a></li>
+            </th:block>
+
+            <li><a href="login/logout">로그아웃</a></li>
+        </ul>
     </div>
     <div th:if="${session.auth == null}">
         <form action="/login/login" method="post" th:object="${loginCommand}">
