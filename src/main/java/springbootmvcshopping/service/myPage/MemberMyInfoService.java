@@ -14,7 +14,7 @@ public class MemberMyInfoService {
     MemberInfoMapper memberInfoMapper;
 
     public void execute(HttpSession session, Model model) {
-        AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("AuthInfoDTO");
+        AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
         String memberId = auth.getUserId();
         MemberDTO memberDTO = memberInfoMapper.memberSelectOne(memberId);
         model.addAttribute("memberCommand", memberDTO);

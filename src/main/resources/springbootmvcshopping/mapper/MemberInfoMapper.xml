@@ -14,4 +14,10 @@
         select <include refid="memberBaseColumns"></include> from members where member_id = #{memberId}
     </select>
 
+    <update id="memberUpdate" parameterType="memberDTO">
+        update members set member_name = #{memberName}, member_addr = #{memberAddr}, member_addr_detail = #{memberAddrDetail},
+                           member_post = #{memberPost}, member_phone1 = #{memberPhone1}, member_phone2 = #{memberPhone2}, member_email = #{memberEmail},
+                           member_birth = #{memberBirth} where member_id = #{memberId}
+    </update>
+
 </mapper>

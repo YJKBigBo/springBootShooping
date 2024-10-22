@@ -26,6 +26,7 @@ public class UserLoginService {
                     , auth.getUserPw())) {
                 System.out.println("비밀번호가 일치합니다.");
                 session.setAttribute("auth", auth);
+                System.out.println(auth.getUserId());
             }else {
                 result.rejectValue("userPw", "loginCommand.userPw"
                         , "비밀번호가 틀렸습니다.");

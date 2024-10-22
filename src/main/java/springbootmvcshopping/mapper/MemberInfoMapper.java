@@ -6,4 +6,5 @@ import springbootmvcshopping.domain.MemberDTO;
 @Mapper
 public interface MemberInfoMapper {
     public MemberDTO memberSelectOne(String memberId);
+    public Integer memberUpdate(MemberDTO dto);
 }
