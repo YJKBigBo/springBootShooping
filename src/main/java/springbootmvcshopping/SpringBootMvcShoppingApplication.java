@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springbootmvcshopping.command.LoginCommand;
 import springbootmvcshopping.service.EmailSendService;
+import springbootmvcshopping.service.SMSMessageService;
 
 @Controller
 @SpringBootApplication
@@ -42,6 +43,20 @@ public class SpringBootMvcShoppingApplication {
     @PostMapping("mailling")
     public String mail(String fromEmail, String toEmail, String subject, String content) {
         emailSendService.mailSend(fromEmail, toEmail, subject, content);
+        return "redirect:/";
+    }
+
+    @Autowired
+    SMSMessageService sMSMessageService;
+
+    @GetMapping("/smsSend")
+    public String sms() {
+        return "thymeleaf/sms";
+    }
+
+    @PostMapping("/smsSend")
+    public String sms(String userPhone, String message) {
+        sMSMessageService.smsSend(userPhone, message);
         return "redirect:/";
     }
 
