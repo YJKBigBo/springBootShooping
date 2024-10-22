@@ -24,4 +24,8 @@
         update members set member_pw = #{_newPw} where member_id = #{_memberId}
     </update>
 
+    <delete id="memberDelete">
+        delete from members where member_id = #{memberId}
+    </delete>
+
 </mapper>

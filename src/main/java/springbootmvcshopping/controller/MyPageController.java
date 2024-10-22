@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springbootmvcshopping.command.MemberCommand;
+import springbootmvcshopping.service.myPage.MemberDropService;
 import springbootmvcshopping.service.myPage.MemberMyInfoService;
 import springbootmvcshopping.service.myPage.MemberMyUpdateService;
 import springbootmvcshopping.service.myPage.MemberPwUpdateService;
@@ -24,6 +25,9 @@ public class MyPageController {
 
     @Autowired
     MemberPwUpdateService memberPwUpdateService;
+
+    @Autowired
+    MemberDropService memberDropService;
 
     @GetMapping("memberMypage")
     public String memMypage(HttpSession session, Model model) {
@@ -52,6 +56,17 @@ public class MyPageController {
     public String newPw(String oldPw, String newPw, HttpSession session) {
         memberPwUpdateService.execute(oldPw, newPw, session);
         return "thymeleaf/myPage/myNewPw";
+    }
+
+    @GetMapping("memberDrop")
+    public String memberDrop(){
+        return "thymeleaf/myPage/memberDrop";
+    }
+
+    @PostMapping("memberDropOk")
+    public String memberDropOk(String memberPw, HttpSession session){
+        memberDropService.execute(memberPw, session);
+        return "redirect:/";
     }
 
 }
