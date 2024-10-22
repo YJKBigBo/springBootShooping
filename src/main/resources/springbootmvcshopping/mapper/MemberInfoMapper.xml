@@ -20,4 +20,8 @@
                            member_birth = #{memberBirth} where member_id = #{memberId}
     </update>
 
+    <update id="memberPwUpdate">
+        update members set member_pw = #{_newPw} where member_id = #{_memberId}
+    </update>
+
 </mapper>
