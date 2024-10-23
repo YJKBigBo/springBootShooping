@@ -1,5 +1,6 @@
 package springbootmvcshopping.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,8 +63,8 @@ public class EmployeeController {
     }
 
     @GetMapping("empDetail/{empNum}")
-    public String employeeDetail(@PathVariable("empNum") String empNum, Model model){
-        employeeDetailService.execute(empNum, model);
+    public String employeeDetail(@PathVariable("empNum") String empNum, Model model, HttpSession session){
+        employeeDetailService.execute(empNum, model, session);
         return "thymeleaf/employee/employeeDetail";
     }
 
