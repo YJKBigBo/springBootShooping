@@ -19,4 +19,8 @@
         insert into goods (<include refid="goodsColumn"></include>) values (#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContents}, #{empNum},0,null,null,null,null,sysdate,null,null)
     </insert>
 
+    <select id="goodsSelectOne" parameterType="string" resultType="GoodsDTO">
+        select <include refid="goodsColumn"></include> from goods where goods_num = #{goodsNum}
+    </select>
+
 </mapper>

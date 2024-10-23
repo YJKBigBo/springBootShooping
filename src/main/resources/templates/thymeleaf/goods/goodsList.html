@@ -20,7 +20,7 @@
 <table border="1" width="600" align="center">
   <caption>상품 목록</caption>
     <tr th:each="goodsCommand : ${goodsCommand}">
-      <td><a href="goodsInfo?goodsNum=${dto.goodsNum}" onclick="selectProduct('${dto.goodsNum}', '${dto.goodsName}')">상품번호: [[${goodsCommand.goodsNum}]]</a></td>
+      <td><a th:href="|goodsInfo/${goodsCommand.goodsNum}|">상품번호: [[${goodsCommand.goodsNum}]]</a></td>
       <td>상품 이름 : [[${goodsCommand.goodsName}]]</td>
       <td>상품 가격 : [[${goodsCommand.goodsPrice}]]</td>
     </tr>
