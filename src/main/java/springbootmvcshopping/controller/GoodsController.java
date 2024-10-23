@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springbootmvcshopping.command.GoodsCommand;
 import springbootmvcshopping.service.AutoNumService;
-import springbootmvcshopping.service.goods.GoodsDetailService;
-import springbootmvcshopping.service.goods.GoodsListService;
-import springbootmvcshopping.service.goods.GoodsUpdateService;
-import springbootmvcshopping.service.goods.GoodsWriteService;
+import springbootmvcshopping.service.goods.*;
 
 @Controller
 @RequestMapping("goods")
@@ -32,6 +29,9 @@ public class GoodsController {
 
     @Autowired
     GoodsUpdateService goodsUpdateService;
+
+    @Autowired
+    GoodsDeleteService goodsDeleteService;
 
     @GetMapping("goodsList")
     public String goodsList(Model model) {
@@ -67,5 +67,11 @@ public class GoodsController {
     public String goodsUpdate(GoodsCommand goodsCommand, HttpSession session) {
         goodsUpdateService.execute(goodsCommand, session);
         return "redirect:goodsList";
+    }
+
+    @GetMapping("goodsDelete/{goodsNum}")
+    public String goodsDelete(@PathVariable("goodsNum") String goodsNum){
+        goodsDeleteService.execute(goodsNum);
+        return "redirect:../goodsList";
     }
 }

@@ -26,4 +26,8 @@
     <update id="goodsUpdate" parameterType="GoodsDTO">
         update goods set goods_name = #{goodsName}, goods_price = #{goodsPrice}, goodsContents = #{goodsContents}, visit_count = #{visitCount}, update_Emp_Num = #{updateEmpNum}, goods_update_date = sysdate, GOODS_REGIST_DATE = #{goodsRegisetDate}, EMP_NUM = #{empNum}
     </update>
+
+    <delete id="goodsDelete" parameterType="string">
+        delete from goods where goods_num = #{goodsNum}
+    </delete>
 </mapper>
