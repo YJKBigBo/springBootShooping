@@ -6,9 +6,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Component
 public class SpringBootConfig {
+    // ModelAndView 객체
+    @Bean(value = "jsonView")
+    public MappingJackson2JsonView jsonView() {
+        return new MappingJackson2JsonView();
+    }
+
     //securit에 의한 로그인 화면을 사용하지 않게 설정하는 것
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {

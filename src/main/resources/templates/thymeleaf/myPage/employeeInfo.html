@@ -3,68 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+  <script type="text/javascript">
+    $(function (){
+      $.ajax({
+        type : "post",
+        url : "empMyPage",
+        success:function (result){ //result => ModelAndView를 받음
+          console.log(result);
+          $("#content").css("display", "none");
+          $("#empForm").css("display", "block");
+          // var enterDate = new Date(result.employeeCommand.empHireDate);
+          // var enterYear = enterDate.getFullYear();
+          // var enterMonth = "0" + (enterDate.getMonth() + 1).slice(-2);
+          // var enterDay = enterDate.getDay().slice(-2);
+
+          var item="";
+          item += "직원번호 : "+ result.employeeCommand.empNum +"<br />\n" +
+                    "이름 : "+ result.employeeCommand.empName +"<br />\n" +
+                    "아이디 : "+ result.employeeCommand.empId +"<br />\n" +
+                    "주민번호 : "+ result.employeeCommand.empJumin +"<br />\n" +
+                    "주소 : "+ result.employeeCommand.empAddr +"<br />\n" +
+                    "상세주소 : "+ result.employeeCommand.empAddrDetail +"<br />\n" +
+                    "우편번호 : "+ result.employeeCommand.empPost +"<br />\n" +
+                    "연락처 : "+ result.employeeCommand.empPhone +"<br />\n" +
+                    "이메일 : "+ result.employeeCommand.empEmail +"<br />" +
+                    // "입사일 : "+ enterYear+"-"+enterMonth+"-"+enterDay+"<br />"
+          $("#content").html(item);
+
+        },
+        error : function (){
+          console.log("error");
+        }
+
+      });
+    });
+
+    function empModify(){
+      $.ajax({
+        type : "get",
+        url : "empModify",
+        success : function (result){ // result ==> map으로 받아올것임
+          console.log(result);
+          // var enterDate = new Date(result.employeeCommand.empHireDate);
+          // var enterYear = enterDate.getFullYear();
+          // var enterMonth = "0" + (enterDate.getMonth() + 1).slice(-2);
+          // var enterDay = enterDate.getDay().slice(-2);
+          $("#empNum").val(result.employeeCommand.empNum);
+          $("#empName").val(result.employeeCommand.empName);
+          $("#empId").val(result.employeeCommand.empId);
+          $("#empPhone").val(result.employeeCommand.empPhone);
+          $("#empEmail").val(result.employeeCommand.empEmail);
+          $("#empAddr").val(result.employeeCommand.empAddr);
+          $("#empAddrDetail").val(result.employeeCommand.empAddrDetail);
+          $("#empPost").val(result.employeeCommand.empPost);
+          $("#empJumin").val(result.employeeCommand.empJumin);
+          // $("#empHireDate").val(enterYear+"-"+enterMonth+"-"+enterDay);
+        },
+        error : function (){
+
+        }
+      });
+    }
+
+    function empPw(){
+      $("#content").css("display", "block");
+      $("#empForm").css("display", "none");
+      var item = '<form action=\"memberPwPro\" method=\"post\" id=\"frm\">' ;
+          item += '현재 비밀번호 : <input type=\"password\" name=\"oldPw\" id=\"oldPw\" required=\"required\" />' ;
+          item += '새 비밀번호 : <input type=\"password\" name=\"newPw\" id=\"newPw\" required=\"required\" />' ;
+          item += '새 비밀번호 확인 : <input type=\"password\" name=\"newPwCon\" id=\"newPwCon\" required=\"required\"> <br />';
+          item += '<input type=\"submit\" value=\"비밀번호 변경\">';
+          item += '</from>';
+      $("#content").html(item);
+    }
+  </script>
 </head>
 <body>
-<form action="empModify" method="post" th:object="${employeeCommand}">
-  <table border="1">
-    <tr>
-      <td>
-        직원번호 : <input type="text" name="empNum" th:value="${employeeCommand.empNum}" readonly="readonly"/>자동부여
-      </td>
-    </tr>
-    <tr>
-      <td>직원 주민번호 : <input type="text" name="empJumin" th:value="${employeeCommand.empJumin}" /></td>
-    </tr>
-    <tr>
-      <td>
-        직원이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}" />
-        <span style="color: red" th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        직원아이디 : <input type="text" name="empId" id="userId" th:value="${employeeCommand.empId}" />
-        <span id="idCheck"></span>
-        <span style="color: red" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        직원비밀번호 : <input type="password" name="empPw" />
-        <span style="color: red" th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        직원주소 : <input type="text" name="empAddr" id="sample4_roadAddress" required="required" th:value="${employeeCommand.empAddr}" />
-        <button type="button" onclick="execDaumPostcode();">우편번호 검색</button>
-        <span style="color: red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>상세주소 : <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}" /></td>
-    </tr>
-    <tr>
-      <td>우편번호 : <input type="text" name="empPost" th:value="${employeeCommand.empPost}" /></td>
-    </tr>
 
-    <tr>
-      <td>
-        직원연락처 : <input type="tel" name="empPhone" th:value="${employeeCommand.empPhone}" />
-        <span style="color: red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span>
-      </td>
-    </tr>
+<ul>
+  <li><a href="/">홈</a></li>
+  <li><a href="employeeMyPage">내 정보 보기</a></li>
+  <li><a href="javascript:empModify();">내 정보 수정</a></li>
+  <li><a href="javascript:empPw()">비밀번호 변경</a></li>
+  <li><a href="empDrop">회원 탈퇴</a></li>
+</ul>
 
-    <tr>
-      <td>
-        직원이메일 : <input type="email" name="empEmail" th:value="${employeeCommand.empEmail}" />
-        <span style="color: red" id="userEamil" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span>
-      </td>
-    </tr>
-  </table>
-  <input type="submit" value="직원수정" />
-  </table>
-</form>
+<div id="content"></div>
+<div id="empForm" style="display: none">
+  <form action="empModify" method="post" name="frm">
+    <table border="1">
+      <tr>
+        <td>
+          직원번호 : <input type="text" name="empNum" id="empNum" readonly="readonly"/>자동부여
+        </td>
+      </tr>
+      <tr>
+        <td>직원 주민번호 : <input type="text" name="empJumin" id="empJumin" /></td>
+      </tr>
+      <tr>
+        <td>
+          직원이름 : <input type="text" name="empName" id="empName" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          직원아이디 : <input type="text" name="empId" id="empId" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          직원비밀번호 : <input type="password" name="empPw" id="empPw"  />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          직원주소 : <input type="text" name="empAddr" required="required" id="empAddr" />
+        </td>
+      </tr>
+      <tr>
+        <td>상세주소 : <input type="text" name="empAddrDetail" id="empAddrDetail" /></td>
+      </tr>
+      <tr>
+        <td>우편번호 : <input type="text" name="empPost" id="empPost" /></td>
+      </tr>
+
+      <tr>
+        <td>
+          직원연락처 : <input type="tel" name="empPhone" id="empPhone"  />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          직원이메일 : <input type="email" name="empEmail" id="empEmail"  />
+        </td>
+      </tr>
+    </table>
+    <input type="submit" value="직원수정" />
+    </table>
+  </form>
+</div>
 
 </body>
 </html>
