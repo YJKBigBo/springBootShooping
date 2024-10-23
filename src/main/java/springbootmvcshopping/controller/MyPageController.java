@@ -102,4 +102,13 @@ public class MyPageController {
         return mav;
     }
 
+    @Autowired
+    EmployeePwUpdateService employeePwUpdateService;
+
+    @PostMapping("empPwPro")
+    public String empPwPro(@RequestParam("oldPw") String oldPw, String newPw, HttpSession session) {
+        employeePwUpdateService.execute(oldPw, newPw, session);
+        return "redirect:employeeMyPage";
+    }
+
 }

@@ -9,28 +9,23 @@
       $.ajax({
         type : "post",
         url : "empMyPage",
-        success:function (result){ //result => ModelAndView를 받음
+        success:function(result){ // result ==> ModelAndView
           console.log(result);
-          $("#content").css("display", "none");
-          $("#empForm").css("display", "block");
           // var enterDate = new Date(result.employeeCommand.empHireDate);
-          // var enterYear = enterDate.getFullYear();
-          // var enterMonth = "0" + (enterDate.getMonth() + 1).slice(-2);
-          // var enterDay = enterDate.getDay().slice(-2);
-
+          // var enterYear =  enterDate.getFullYear();
+          // var enterMonth =  ("0" + (enterDate.getMonth() + 1)).slice(-2); // 9 ==> 09
+          // var enterDay =  ("0" + enterDate.getDate()).slice(-2);
           var item="";
-          item += "직원번호 : "+ result.employeeCommand.empNum +"<br />\n" +
-                    "이름 : "+ result.employeeCommand.empName +"<br />\n" +
-                    "아이디 : "+ result.employeeCommand.empId +"<br />\n" +
-                    "주민번호 : "+ result.employeeCommand.empJumin +"<br />\n" +
-                    "주소 : "+ result.employeeCommand.empAddr +"<br />\n" +
-                    "상세주소 : "+ result.employeeCommand.empAddrDetail +"<br />\n" +
-                    "우편번호 : "+ result.employeeCommand.empPost +"<br />\n" +
-                    "연락처 : "+ result.employeeCommand.empPhone +"<br />\n" +
-                    "이메일 : "+ result.employeeCommand.empEmail +"<br />" +
-                    // "입사일 : "+ enterYear+"-"+enterMonth+"-"+enterDay+"<br />"
+          item+="이름 : "+ result.employeeCommand.empName +"<br />";
+          item+="아이디 : "+ result.employeeCommand.empId +"<br />";
+          item+="주소 : "+ result.employeeCommand.empAddr +"<br />";
+          item+="상세주소 : "+ result.employeeCommand.empAddrDetail +"<br />";
+          item+="우편번호 : "+ result.employeeCommand.empPost +"<br />";
+          item+="연락처 : "+ result.employeeCommand.empPhone +"<br />";
+          item+="주민번호 : "+ result.employeeCommand.empJumin+"<br />";
+          // item+="입사일 : "+ enterYear +"-"+enterMonth+"-"+enterDay +"<br />";
+          item+="이메일 : "+ result.employeeCommand.empEmail +"<br />";
           $("#content").html(item);
-
         },
         error : function (){
           console.log("error");
@@ -69,11 +64,11 @@
     function empPw(){
       $("#content").css("display", "block");
       $("#empForm").css("display", "none");
-      var item = '<form action=\"memberPwPro\" method=\"post\" id=\"frm\">' ;
-          item += '현재 비밀번호 : <input type=\"password\" name=\"oldPw\" id=\"oldPw\" required=\"required\" />' ;
-          item += '새 비밀번호 : <input type=\"password\" name=\"newPw\" id=\"newPw\" required=\"required\" />' ;
-          item += '새 비밀번호 확인 : <input type=\"password\" name=\"newPwCon\" id=\"newPwCon\" required=\"required\"> <br />';
-          item += '<input type=\"submit\" value=\"비밀번호 변경\">';
+      var item = '<form action="empPwPro" method="post" id="frm">' ;
+          item += '현재 비밀번호 : <input type="password" name="oldPw" id="oldPw" required="required" />' ;
+          item += '새 비밀번호 : <input type="password" name="newPw" id="newPw" required="required" />' ;
+          item += '새 비밀번호 확인 : <input type="password" name="newPwCon" id="newPwCon" required="required"> <br />';
+          item += '<input type="submit" value="비밀번호 변경">';
           item += '</from>';
       $("#content").html(item);
     }
