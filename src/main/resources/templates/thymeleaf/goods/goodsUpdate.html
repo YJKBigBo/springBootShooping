@@ -21,11 +21,11 @@
     <tr><th>등록한 사원</th>
       <td><input type="text" name="empNum" th:value="${goodsCommand.empNum}" readonly="readonly"></td></tr>
     <tr><th>등록일</th>
-      <td><input type="text" name="goodsRegistDate" th:value="${#dates.format(goodsCommand.goodsRegistDate,'yyyy-MM-dd')}" readonly="readonly"></td></tr>
+      <td><input type="date" name="goodsRegistDate" th:value="${#dates.format(goodsCommand.goodsRegistDate,'yyyy-MM-dd')}" readonly="readonly"></td></tr>
     <tr><th>마지막 수정 사원</th>
       <td><input type="text" name="updateEmpNum" th:value="${goodsCommand.updateEmpNum}" readonly="readonly"></td></tr>
     <tr><th>마지막 수정일</th>
-      <td><input type="text" name="goodsUpdateDate" th:value="${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}" readonly="readonly"></td></tr>
+      <td><input type="date" name="goodsUpdateDate" th:value="${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}" readonly="readonly"></td></tr>
     <tr><th colspan="2">
       <input type="submit" value="수정완료" />
       <button type="button" onclick="">수정취소</button>

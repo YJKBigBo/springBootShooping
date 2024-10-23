@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,9 +14,9 @@ import java.util.Date;
 public class GoodsDTO {
     String goodsNum;
     String goodsName;
-    int goodsPrice;
+    Integer goodsPrice;
     String goodsContents;
-    int visitCount;
+    Integer visitCount;
     String goodsMainImage;
     String goodsMainStoreImage;
     String goodsDetailImage;
