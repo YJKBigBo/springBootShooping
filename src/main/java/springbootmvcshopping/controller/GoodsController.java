@@ -12,6 +12,7 @@ import springbootmvcshopping.command.GoodsCommand;
 import springbootmvcshopping.service.AutoNumService;
 import springbootmvcshopping.service.goods.GoodsDetailService;
 import springbootmvcshopping.service.goods.GoodsListService;
+import springbootmvcshopping.service.goods.GoodsUpdateService;
 import springbootmvcshopping.service.goods.GoodsWriteService;
 
 @Controller
@@ -28,6 +29,9 @@ public class GoodsController {
 
     @Autowired
     GoodsDetailService goodsDetailService;
+
+    @Autowired
+    GoodsUpdateService goodsUpdateService;
 
     @GetMapping("goodsList")
     public String goodsList(Model model) {
@@ -51,5 +55,17 @@ public class GoodsController {
     public String goodsInfo(@PathVariable("goodsNum") String goodsNum, Model model) {
         goodsDetailService.execute(goodsNum, model);
         return "thymeleaf/goods/goodsInfo";
+    }
+
+    @GetMapping("goodsUpdate/{goodsNum}")
+    public String goodsUpdate(@PathVariable("goodsNum") String goodsNum, Model model) {
+        goodsDetailService.execute(goodsNum, model);
+        return "thymeleaf/goods/goodsUpdate";
+    }
+
+    @PostMapping("goodsUpdate")
+    public String goodsUpdate(GoodsCommand goodsCommand, HttpSession session) {
+        goodsUpdateService.execute(goodsCommand, session);
+        return "redirect:goodsList";
     }
 }

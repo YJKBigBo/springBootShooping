@@ -17,9 +17,9 @@
     <tr><th>마지막 수정 사원</th><td>[[${goodsCommand.updateEmpNum}]]</td></tr>
     <tr><th>마지막 수정일</th><td>[[${goodsCommand.goodsUpdateDate}]]</td></tr>
     <tr><th colspan="2">
-        <a href="goodsUpdate.goods?goodsNum=${dto.goodsNum}">상품수정</a> |
-        <a href="goodsDelete.goods?goodsNum=${dto.goodsNum}">상품 삭제</a> |
-        <a href="goodsList.goods">상품목록</a></th></tr>
+        <a th:href="|../goodsUpdate/${goodsCommand.goodsNum}|">상품수정</a> |
+        <a th:href="|goodsDelete/${goodsCommand.goodsNum}|">상품 삭제</a> |
+        <a href="goodsList">상품목록</a></th></tr>
 </table>
 </body>
 </html>
