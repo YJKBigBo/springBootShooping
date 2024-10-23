@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface GoodsMapper {
     public List<GoodsDTO> goodsSelectAll();
+    public void goodsInsert(GoodsDTO GoodsDTO);
 }

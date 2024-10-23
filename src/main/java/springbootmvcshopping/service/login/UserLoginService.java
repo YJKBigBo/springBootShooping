@@ -20,6 +20,9 @@ public class UserLoginService {
     public void execute(LoginCommand loginCommand
             ,HttpSession session, BindingResult result) {
         AuthInfoDTO auth = loginMapper.loginSelectOne(loginCommand.getUserId());
+        System.out.println(auth.getUserNum());
+        System.out.println(auth.getUserName());
+        System.out.println(auth.getUserPw());
         if(auth != null) {
             System.out.println("아이디가 존재합니다.");
             if(passwordEncoder.matches(loginCommand.getUserPw()

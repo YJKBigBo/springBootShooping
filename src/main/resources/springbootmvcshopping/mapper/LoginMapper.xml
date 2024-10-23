@@ -20,13 +20,14 @@
         <result column="member_pw" property="userPw" jdbcType="VARCHAR" />
         <result column="member_name" property="userName" jdbcType="VARCHAR" />
         <result column="member_email" property="userEmail" jdbcType="VARCHAR" />
+        <result column="member_num" property="userNum" jdbcType="VARCHAR" />
         <result column="grade" property="grade" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="loginSelectOne" parameterType="string" resultMap="authResultMap">
-        select member_id, member_pw, member_name, member_email, 'mem' as grade from members where member_id = #{userId}
+        select member_id, member_pw, member_name, member_email, member_num,'mem' as grade from members where member_id = #{userId}
             union
-        select emp_id, emp_pw, emp_name, emp_email, 'emp' from employees where emp_id = #{userId}
+        select emp_id, emp_pw, emp_name, emp_email, emp_num,'emp' from employees where emp_id = #{userId}
     </select>
 
 </mapper>
