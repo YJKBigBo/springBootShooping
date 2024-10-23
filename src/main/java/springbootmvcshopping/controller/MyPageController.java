@@ -29,6 +29,9 @@ public class MyPageController {
     @Autowired
     EmployeeMyInfoService employeeMyInfoService;
 
+    @Autowired
+    EmployeeInfoService employeeInfoService;
+
     @GetMapping("memberMypage")
     public String memMypage(HttpSession session, Model model) {
         memberMyInfoService.execute(session, model);
@@ -69,10 +72,10 @@ public class MyPageController {
         return "redirect:/";
     }
 
-    @GetMapping("empMyPage")
-    public String empMypage(HttpSession session,Model model){
-        employeeMyInfoService.execute(session, model);
-        return "thymeleaf/myPage/empMypage";
+    @GetMapping("employeeMyPage")
+    public String empPage(HttpSession session, Model model) {
+        employeeInfoService.execute(session, model);
+        return "thymeleaf/myPage/employeeInfo";
     }
 
 }

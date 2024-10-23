@@ -69,8 +69,8 @@ public class EmployeeController {
     }
 
     @GetMapping("employeeUpdate")
-    public String employeeUpdate(String empNum, Model model){
-        employeeDetailService.execute(empNum, model);
+    public String employeeUpdate(String empNum, Model model, HttpSession session){
+        employeeDetailService.execute(empNum, model, session);
         return "thymeleaf/employee/employeeModify";
     }
 

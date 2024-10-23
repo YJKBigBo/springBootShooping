@@ -5,5 +5,5 @@ import springbootmvcshopping.domain.EmployeeDTO;
 
 @Mapper
 public interface EmployeeMyInfoMapper {
-    public EmployeeDTO EmployeeSelectOne(String empId);
+    public EmployeeDTO employeeSelectOne(String empId);
 }
