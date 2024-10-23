@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springbootmvcshopping.mapper.GoodsMapper">
+    <sql id="goodsColumn">
+        GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, VISIT_COUNT, GOOBS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE, GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE, EMP_NUM, GOODS_REGIST_DATE, UPDATE_EMP_NUM, GOODS_UPDATE_DATE
+    </sql>
+
+    <select id="goodsSelectAll" resultType="GoodsDTO">
+        select <include refid="goodsColumn"></include> from goods
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>goodsList.jsp</title>
+  <script type="text/javascript">
+    function selectProduct(goodsNum, goodsName) {
+      opener.document.getElementById('goodsNum').value = goodsNum;
+      opener.document.getElementById('goodsName').value = goodsName;
+      window.close();
+    }
+  </script>
+</head>
+<body>
+<ul>
+  <li><a href="goodsWrite">상품 추가</a></li>
+  <li><a href="goodsIpgo">상품 입고</a></li>
+  <li><a href="goodsIpgoList">상품 입고 현황</a></li>
+</ul>
+<table border="1" width="600" align="center">
+  <caption>상품 목록</caption>
+    <tr th:each="goodsCommand : ${goodsCommand}">
+      <td><a href="goodsInfo.goods?goodsNum=${dto.goodsNum}" onclick="selectProduct('${dto.goodsNum}', '${dto.goodsName}')">상품번호: [[${goodsCommand.goodsNum}]]</a></td>
+      <td rowspan="2">상품 이름 : [[${goodsCommand.goodsName}]]</td>
+      <td rowspan="2">상품 가격 : [[${goodsCommand.goodsPrice}]]</td>
+    </tr>
+</table>
+</body>
+</html>
