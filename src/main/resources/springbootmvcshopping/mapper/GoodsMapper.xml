@@ -66,4 +66,8 @@
     <select id="goodsCount" >
         select count(*) from goods
     </select>
+
+    <select id="goodsName" parameterType="string">
+        select goods_name where goodsNum = #{goodsNum}
+    </select>
 </mapper>

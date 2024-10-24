@@ -10,4 +10,8 @@
     <select id="goodsIpgoSelectAll" resultType="GoodsIpgoDTO">
         select <include refid="IpgoColumn"></include> from goods_ipgo
     </select>
+
+    <insert id="goodsIpgoInsert" parameterType="GoodsIpgoDTO">
+        insert into goods_ipgo (<include refid="IpgoColumn"></include>) values (#{goodsNum}, #{ipgoNum}, #{ipgoQty}, #{ipgoDate}, #{madeDate}, #{ipgoPrice}, #{empNum})
+    </insert>
 </mapper>
