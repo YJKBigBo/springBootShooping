@@ -49,6 +49,11 @@ public class GoodsController {
 
     @GetMapping("goodsWrite")
     public String goodsWrite() {
+        return "thymeleaf/goods/goodsWrite";
+    }
+
+    @GetMapping("goodsForm")
+    public String goodsForm() {
         return "thymeleaf/goods/goodsForm";
     }
 
