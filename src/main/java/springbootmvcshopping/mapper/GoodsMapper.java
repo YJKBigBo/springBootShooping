@@ -12,6 +12,6 @@ public interface GoodsMapper {
     public void goodsInsert(GoodsDTO GoodsDTO);
     public GoodsDTO goodsSelectOne(String goodsNum);
     public void goodsUpdate(GoodsDTO GoodsDTO);
-    public void goodsDelete(String[] goodsNum);
+    public int goodsDelete(String[] goodsNum);
     public int goodsCount();
 }
