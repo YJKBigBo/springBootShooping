@@ -9,7 +9,7 @@ public class GoodsDeleteService {
     @Autowired
     GoodsMapper goodsMapper;
 
-    public void execute(String goodsNum){
+    public void execute(String[] goodsNum){
         goodsMapper.goodsDelete(goodsNum);
     }
 }

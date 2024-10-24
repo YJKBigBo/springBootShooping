@@ -11,13 +11,22 @@
         GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, EMP_NUM, VISIT_COUNT, GOODS_REGIST_DATE, GOODS_UPDATE_DATE
     </sql>
 
-    <sql id="autoNum">
-        select nvl(goods_num,0)+1
-    </sql>
-
-    <select id="goodsSelectAll" resultType="GoodsDTO">
-        select <include refid="goodsColumn"></include> from goods
+    <select id="goodsSelectAll" resultType="GoodsDTO" parameterType="startEndPageDTO">
+        select * from
+        (select row_number() over (order by goods_num asc ) as rn,
+        <include refid="insertGoodsColumn" /> from goods
+        <where>
+            <if test="searchWord != null">
+                goods_NAME like '%'||#{searchWord}||'%'
+            </if>
+        </where>
+        )
+        where rn between #{startRow} and #{endRow}
     </select>
+
+
+
+
 
     <insert id="goodsInsert" parameterType="GoodsDTO">
         insert into goods (<include refid="insertGoodsColumn"></include>) values (#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContents}, #{empNum},0,sysdate,sysdate)
@@ -34,4 +43,8 @@
     <delete id="goodsDelete" parameterType="string">
         delete from goods where goods_num = #{goodsNum}
     </delete>
+
+    <select id="goodsCount" >
+        select count(*) from goods
+    </select>
 </mapper>
