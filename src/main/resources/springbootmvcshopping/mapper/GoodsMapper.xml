@@ -4,16 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="springbootmvcshopping.mapper.GoodsMapper">
     <sql id="goodsColumn">
-        GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, EMP_NUM, VISIT_COUNT, GOOBS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE, GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE, GOODS_REGIST_DATE, UPDATE_EMP_NUM, GOODS_UPDATE_DATE
+        GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, EMP_NUM, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE, GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE, GOODS_REGIST_DATE, UPDATE_EMP_NUM, GOODS_UPDATE_DATE
     </sql>
 
     <sql id="insertGoodsColumn">
-        GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, EMP_NUM, VISIT_COUNT, GOODS_REGIST_DATE, GOODS_UPDATE_DATE
+        GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, EMP_NUM, VISIT_COUNT, GOODS_REGIST_DATE, GOODS_UPDATE_DATE, GOODS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE, GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE
     </sql>
+
+    <resultMap id="goodsResultMap" type="GoodsDTO">
+        <constructor>
+            <idArg column="GOODS_NUM" jdbcType="VARCHAR" javaType="string" />
+            <arg column="GOODS_NAME" jdbcType="VARCHAR" javaType="string" />
+            <arg column="GOODS_PRICE" jdbcType="BIGINT" javaType="integer"/>
+            <arg column="GOODS_CONTENTS" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="VISIT_COUNT" jdbcType="BIGINT" javaType="integer"/>
+            <arg column="GOODS_MAIN_IMAGE" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="GOODS_MAIN_STORE_IMAGE" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="GOODS_DETAIL_IMAGE" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="GOODS_DETAIL_STORE_IMAGE" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="EMP_NUM" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="GOODS_REGIST_DATE" jdbcType="DATE" javaType="java.util.Date"/>
+            <arg column="UPDATE_EMP_NUM" jdbcType="VARCHAR" javaType="string"/>
+            <arg column="GOODS_UPDATE_DATE" jdbcType="DATE" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
 
     <select id="goodsSelectAll" resultType="GoodsDTO" parameterType="startEndPageDTO">
         select * from
-        (select row_number() over (order by goods_num asc ) as rn,
+        (
+        select row_number() over (order by goods_num asc ) as rn,
         <include refid="insertGoodsColumn" /> from goods
         <where>
             <if test="searchWord != null">
@@ -29,7 +48,7 @@
 
 
     <insert id="goodsInsert" parameterType="GoodsDTO">
-        insert into goods (<include refid="insertGoodsColumn"></include>) values (#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContents}, #{empNum},0,sysdate,sysdate)
+        insert into goods (<include refid="insertGoodsColumn"></include>) values (#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContents}, #{empNum},0,sysdate,sysdate, #{goodsMainImage}, #{goodsMainStoreImage}, <if test="goodsMainStoreImage != null">#{goodsDetailImage}, #{goodsDetailStoreImage},</if> <if test="goodsMainStoreImage == null">null, null</if>)
     </insert>
 
     <select id="goodsSelectOne" parameterType="string" resultType="GoodsDTO">

@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springbootmvcshopping.command.GoodsCommand;
 import springbootmvcshopping.service.AutoNumService;
@@ -17,7 +18,7 @@ public class GoodsController {
 
     @Autowired
     AutoNumService autoNumService;
-    
+
     @Autowired
     GoodsWriteService goodsWriteService;
 
@@ -36,16 +37,19 @@ public class GoodsController {
         return "thymeleaf/goods/goodsList";
     }
 
-    @GetMapping("goodsWrite")
-    public String goodsWrite() {
-        return "thymeleaf/goods/goodsWrite";
+    @PostMapping("goodsForm")
+    public String goodsForm(GoodsCommand goodsCommand, HttpSession session, BindingResult result) {
+        String goodsNum = autoNumService.execute("goods_", "goods_num", 7, "goods");
+        if(result.hasErrors()){
+            return "thymeleaf/goods/goodsForm";
+        }
+        goodsWriteService.execute(goodsCommand, goodsNum, session);
+        return "thymeleaf/goods/goodsRedirect";
     }
 
-    @PostMapping("goodsRegist")
-    public String goodsWrite(GoodsCommand goodsCommand, HttpSession session) {
-        String goodsNum = autoNumService.execute("goods_", "goods_num", 7, "goods");
-        goodsWriteService.execute(goodsCommand, goodsNum, session);
-        return "redirect:goodsList";
+    @GetMapping("goodsWrite")
+    public String goodsWrite() {
+        return "thymeleaf/goods/goodsForm";
     }
 
     @GetMapping("goodsInfo/{goodsNum}")

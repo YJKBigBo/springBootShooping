@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#btn").click(function (){
+                var formData = new FormData($("#frm")[0]);
+                $.ajax({
+                    type : "post",
+                    url : "goodsForm",
+                    data : formData,
+                    enctype : "multipart/form-data",
+                    contentType : false,
+                    processData: false,
+                    success : function (result){
+                        if(result == 200){
+                            location.href="goodsList"
+                        } else{
+                            $("#writeForm").html(result);
+                        }
+                    },
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<form action="goodsForm" method="post" enctype="multipart/form-data" id="frm">
+    <table border = "1" width ="600" align="center">
+        <tr><th>상품명</th>
+            <td><input type="text" name="goodsName"/></td></tr>
+        <tr><th>상품가격</th>
+            <td><input type="number" name="goodsPrice"/></td></tr>
+        <tr><th>상품설명</th>
+            <td><textarea rows="10" cols="50" name="goodsContents"></textarea></td></tr>
+        <tr><th colspan="2"><input type="submit" value="상품등록" /></th></tr>
+        <tr>
+            <th>대문이미지</th>
+            <td><input type="file" name="goodsMainImage" /></td>
+        </tr>
+        <tr>
+            <th>이미지</th>
+            <td><input type="file" name="goodsDetailImage" multiple="multiple" /></td>
+        </tr>
+        <input type="button" id="btn" value="상품 등록" />
+    </table>
+</form>
+</body>
+</html>

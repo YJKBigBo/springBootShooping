@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $.ajax({
+        type : "get",
+        url: "goodsWrite",
+        dataType:"html",
+        success:function(result){
+          $("#writeForm").html(result);
+        },
+        error:function(){
+          alert("서버오류");
+        }
+      });
+    });
+  </script>
 </head>
 <body>
-<form action="goodsRegist" method="post">
-    <table border = "1" width ="600" align="center">
-        <tr><th>상품명</th>
-            <td><input type="text" name="goodsName"/></td></tr>
-        <tr><th>상품가격</th>
-            <td><input type="number" name="goodsPrice"/></td></tr>
-        <tr><th>상품설명</th>
-            <td><textarea rows="10" cols="50" name="goodsContents"></textarea></td></tr>
-        <tr><th colspan="2"><input type="submit" value="상품등록" /></th></tr>
-    </table>
-</form>
+  <ul>
+    <li><a href="goodsForm">상품추가</a></li>
+    <li><a href="goodsIpgoList">상품 입고 현황</a></li>
+  </ul>
+  <div id="wirteForm">
+
+  </div>
+
 </body>
 </html>
