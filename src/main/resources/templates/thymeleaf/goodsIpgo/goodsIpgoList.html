@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>goodsIpgoList.jsp</title>
+</head>
+<body>
+<a href="<c:url value='/' />">홈</a>
+<ul>
+    <li><a href="goodsIpgo">상품 입고</a></li>
+    <li><a href="goodsIpgoList">상품 입고 현황</a></li>
+</ul>
+<table border=1 width="600" align="center">
+    <caption>입고현황</caption>
+    <div>
+        <tr th:each="goodsIpgoCommand : ${goodsIpgoCommand}">
+            <td>번호 : ${status.index + 1}</td>
+            <td><a href="goodsIpgoCommand.ipgo?ipgoNum=${goodsIpgoCommand.ipgoNum}">입고번호 : ${goodsIpgoCommand.ipgoNum}</a></td>
+            <td>상품번호 : ${goodsIpgoCommand.goodsNum}</td>
+            <td>상품가격 : ${goodsIpgoCommand.ipgoPrice}</td>
+            <td>수량 : ${goodsIpgoCommand.ipgoQty}</td>
+            <th>입고일 : ${goodsIpgoCommand.ipgoDate}</th>
+        </tr>
+    <div>
+</table>
+</body>
+</html>
