@@ -11,7 +11,7 @@
 <table border=1 width="600" align="center">
   <form action="goodsList" method="get">
     <tr>
-      <td colspan="6">상품 검색:
+      <td colspan="8">상품 검색:
         <input type="search" name="searchWord" size=60 th:value="${searchWord}">
         <input type="submit" value="검색">
       </td>
@@ -19,8 +19,7 @@
   </form>
   <form action="goodsDelete" method="post" id="frm">
     <tr><td><input type="checkbox" id="checkBoxs" /></td>
-      <td>번호</td><td>이름</td><td>가격</td><td>등록날짜</td>
-      <td><button type="submit" >선택 삭제</button></td>
+      <td>번호</td><td>이름</td><td>가격</td><td>등록날짜</td><td><button type="submit" >선택 삭제</button></td><td>대문이미지</td><td>상세이미지</td>
     </tr>
     <tr th:each=" dto : ${list}">
       <td><input type="checkbox" name="nums" th:value="${dto.goodsNum}"/></td>
@@ -29,10 +28,18 @@
       <td>[[${dto.goodsPrice}]]</td>
       <td>[[${#dates.format(dto.goodsRegistDate,'yyyy-MM-dd')}]]</td>
       <td><button type="button" th:attr="onclick=|javascript:location.href='goodsDelete/${dto.goodsNum}'|">삭제</button></td>
+      <td>
+        <img th:src="|/static/upload/${dto.goodsMainStoreImage}|" />
+      </td>
+      <td>
+        <th:block th:each="image : ${#strings.arraySplit(dto.goodsDetailStoreImage, '/')}">
+        </th:block>
+      </td>
     </tr>
   </form>
+
   <tr>
-    <th colspan="6">
+    <th colspan="8">
       <span th:if="${page <= 1}">[이전]</span>
       <span th:if="${page > 1}">
 			<a th:href="|goodsList?page=${page - 1}&searchWord=${searchWord}|">[이전]</a>

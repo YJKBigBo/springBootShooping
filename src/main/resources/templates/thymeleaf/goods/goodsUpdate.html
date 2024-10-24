@@ -26,6 +26,26 @@
       <td><input type="text" name="updateEmpNum" th:value="${goodsCommand.updateEmpNum}" readonly="readonly"></td></tr>
     <tr><th>마지막 수정일</th>
       <td><input type="date" name="goodsUpdateDate" th:value="${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}" readonly="readonly"></td></tr>
+
+    <tr>
+      <td>
+        대문이미지 <br />
+        <input type="file" name="goodsMainImage" id="mainFile" style="display: none" />
+        [[$(goodsCommand.goodsMainImage)]] <button type="button">삭제</button>
+      </td>
+    </tr>
+
+    <tr>
+      <th>
+        상세이미지 <br />
+      </th>
+      <td>
+        <div th:each="image : ${#strings.arraySplit(goodsCommand.goodsDetailImage, '/')}">
+          [[${image}]] <button type="button">삭제</button>
+        </div>
+      </td>
+
+    </tr>
     <tr><th colspan="2">
       <input type="submit" value="수정완료" />
       <button type="button" onclick="">수정취소</button>
