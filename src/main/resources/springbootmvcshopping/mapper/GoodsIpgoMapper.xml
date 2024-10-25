@@ -14,4 +14,8 @@
     <insert id="goodsIpgoInsert" parameterType="GoodsIpgoDTO">
         insert into goods_ipgo (<include refid="IpgoColumn"></include>) values (#{goodsNum}, #{ipgoNum}, #{ipgoQty}, #{ipgoDate}, #{madeDate}, #{ipgoPrice}, #{empNum})
     </insert>
+
+    <select id="goodsIpgoSelectOne" parameterType="string">
+        select <include refid="IpgoColumn"></include> from goods_ipgo where IPGO_NUM = #{ipgoNum}
+    </select>
 </mapper>

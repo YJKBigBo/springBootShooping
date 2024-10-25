@@ -13,12 +13,11 @@
     <caption>입고현황</caption>
     <div>
         <tr th:each="goodsIpgoCommand : ${goodsIpgoCommand}">
-            <td>번호 : ${status.index + 1}</td>
-            <td><a href="goodsIpgoCommand.ipgo?ipgoNum=${goodsIpgoCommand.ipgoNum}">입고번호 : ${goodsIpgoCommand.ipgoNum}</a></td>
-            <td>상품번호 : ${goodsIpgoCommand.goodsNum}</td>
-            <td>상품가격 : ${goodsIpgoCommand.ipgoPrice}</td>
-            <td>수량 : ${goodsIpgoCommand.ipgoQty}</td>
-            <th>입고일 : ${goodsIpgoCommand.ipgoDate}</th>
+            <td><a th:href="|goodsIpgoDetail/${goodsIpgoCommand.ipgoNum}|">입고번호 : [[${goodsIpgoCommand.ipgoNum}]]</a></td>
+            <td>상품번호 : [[${goodsIpgoCommand.goodsNum}]]</td>
+            <td>상품가격 : [[${goodsIpgoCommand.ipgoPrice}]]</td>
+            <td>수량 : [[${goodsIpgoCommand.ipgoQty}]]</td>
+            <th>입고일 : [[${goodsIpgoCommand.ipgoDate}]]</th>
         </tr>
     <div>
 </table>

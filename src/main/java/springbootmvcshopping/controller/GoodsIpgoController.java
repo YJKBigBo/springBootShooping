@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import springbootmvcshopping.command.GoodsIpgoCommand;
 import springbootmvcshopping.domain.AuthInfoDTO;
 import springbootmvcshopping.service.AutoNumService;
+import springbootmvcshopping.service.goodsIpgo.GoodsIpgoDetailService;
 import springbootmvcshopping.service.goodsIpgo.GoodsIpgoListService;
 import springbootmvcshopping.service.goodsIpgo.GoodsIpgoWriteService;
 
@@ -23,6 +24,9 @@ public class GoodsIpgoController {
 
     @Autowired
     AutoNumService autoNumService;
+
+    @Autowired
+    GoodsIpgoDetailService goodsIpgoDetailService;
 
     @GetMapping("goodsIpgoList")
     public String goodsIpgoList(Model model) {
@@ -41,6 +45,12 @@ public class GoodsIpgoController {
         String goodsIpgoNum = autoNumService.execute("goodsIpgo_", "IPGO_NUM", 11, "goods_ipgo");
         goodsIpgoWriteService.execute(goodsIpgoCommand,  session, goodsIpgoNum);
         return "redirect:goodsIpgoList";
+    }
+
+    @GetMapping("goodsIpgoDetail/{goodsIpgoNum}")
+    public String goodsIpgoDetail(@PathVariable("goodsIpgoNum") String goodsIpgoNum, Model model) {
+        goodsIpgoDetailService.execute(goodsIpgoNum, model);
+        return "thymeleaf/goodsIpgo/goodsIpgoDetail";
     }
 
 }

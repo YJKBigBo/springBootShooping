@@ -6,16 +6,13 @@ import org.springframework.ui.Model;
 import springbootmvcshopping.domain.GoodsIpgoDTO;
 import springbootmvcshopping.mapper.GoodsIpgoMapper;
 
-import java.util.List;
-
 @Service
-public class GoodsIpgoListService {
-
+public class GoodsIpgoDetailService {
     @Autowired
     GoodsIpgoMapper goodsIpgoMapper;
 
-    public void execute(Model model){
-        List<GoodsIpgoDTO> dto = goodsIpgoMapper.goodsIpgoSelectAll();
+    public void execute(String goodsIpgoNum, Model model){
+        GoodsIpgoDTO dto = goodsIpgoMapper.goodsIpgoSelectOne(goodsIpgoNum);
         model.addAttribute("goodsIpgoCommand", dto);
     }
 }

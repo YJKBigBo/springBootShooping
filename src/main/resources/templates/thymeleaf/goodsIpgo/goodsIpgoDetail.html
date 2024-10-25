@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+<body>
+입고번호 : [[${goodsIpgoCommand.ipgoNum}]]<br />
+상품번호 : [[${goodsIpgoCommand.goodsNum}]]<br />
+<%--상품명 : --%>
+입고일 : [[${goodsIpgoCommand.ipgoDate}]]<br />
+입고 수량 : [[${goodsIpgoCommand.ipgoQty}]]<br />
+제조일 : [[${goodsIpgoCommand.madeDate}]]<br />
+가격 : [[${goodsIpgoCommand.ipgoPrice}]]<br />
+등록한 사원 : [[${goodsIpgoCommand.empNum}]]<br />
+<a th:href="|../ipgoUpdate/${goodsIpgoCommand.ipgoNum}|">입고 수정</a> |
+<a th:href="|../ipgoDelete/${goodsIpgoCommand.ipgoNum}|">입고 수정</a>
+</body>
+</html>
