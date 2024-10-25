@@ -37,6 +37,11 @@ public class GoodsController {
         return "thymeleaf/goods/goodsList";
     }
 
+    @GetMapping("goodsForm")
+    public String goodsForm() {
+        return "thymeleaf/goods/goodsForm";
+    }
+
     @PostMapping("goodsForm")
     public String goodsForm(GoodsCommand goodsCommand, HttpSession session, BindingResult result) {
         String goodsNum = autoNumService.execute("goods_", "goods_num", 7, "goods");
@@ -50,11 +55,6 @@ public class GoodsController {
     @GetMapping("goodsWrite")
     public String goodsWrite() {
         return "thymeleaf/goods/goodsWrite";
-    }
-
-    @GetMapping("goodsForm")
-    public String goodsForm() {
-        return "thymeleaf/goods/goodsForm";
     }
 
     @GetMapping("goodsInfo/{goodsNum}")

@@ -48,7 +48,24 @@
 
 
     <insert id="goodsInsert" parameterType="GoodsDTO">
-        insert into goods (<include refid="insertGoodsColumn"></include>) values (#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContents}, #{empNum},0,sysdate,sysdate, #{goodsMainImage}, #{goodsMainStoreImage}, <if test="goodsMainStoreImage != null">#{goodsDetailImage}, #{goodsDetailStoreImage},</if> <if test="goodsMainStoreImage == null">null, null</if>)
+        insert into goods
+        (<include refid="insertGoodsColumn"></include>)
+        values (
+        #{goodsNum},
+        #{goodsName},
+        #{goodsPrice},
+        #{goodsContents},
+        #{empNum},
+        0,
+        sysdate,
+        sysdate,
+        #{goodsMainImage},
+        #{goodsMainStoreImage},
+        <if test="goodsDetailImage != null">#{goodsDetailImage}</if>
+        <if test="goodsDetailImage == null">null</if>,
+        <if test="goodsDetailStoreImage != null">#{goodsDetailStoreImage}</if>
+        <if test="goodsDetailStoreImage == null">null</if>
+        )
     </insert>
 
     <select id="goodsSelectOne" parameterType="string" resultType="GoodsDTO">
@@ -56,7 +73,7 @@
     </select>
 
     <update id="goodsUpdate" parameterType="GoodsDTO">
-        update goods set goods_name = #{goodsName}, goods_price = #{goodsPrice}, goods_Contents = #{goodsContents}, visit_count = #{visitCount}, UPDATE_EMP_NUM = #{updateEmpNum}, EMP_NUM = #{empNum}, GOODS_UPDATE_DATE = sysdate where goods_num = #{goodsNum}
+        update goods set goods_name = #{goodsName}, goods_price = #{goodsPrice}, goods_Contents = #{goodsContents}, visit_count = #{visitCount}, UPDATE_EMP_NUM = #{updateEmpNum}, GOODS_UPDATE_DATE = sysdate where goods_num = #{goodsNum}
     </update>
 
     <delete id="goodsDelete" parameterType="string">

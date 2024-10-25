@@ -24,7 +24,9 @@ public class GoodsUpdateService {
         dto.setVisitCount(goodsCommand.getVisitCount());
         dto.setEmpNum(goodsCommand.getEmpNum());
         dto.setUpdateEmpNum(empNum);
-        System.out.println("empNum 값: " + dto.getGoodsNum());
+        System.out.println("empNum 값: " + dto.getUpdateEmpNum());
+
+
 
         goodsMapper.goodsUpdate(dto);
 
