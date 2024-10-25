@@ -10,6 +10,7 @@ import springbootmvcshopping.domain.AuthInfoDTO;
 import springbootmvcshopping.service.AutoNumService;
 import springbootmvcshopping.service.goodsIpgo.GoodsIpgoDetailService;
 import springbootmvcshopping.service.goodsIpgo.GoodsIpgoListService;
+import springbootmvcshopping.service.goodsIpgo.GoodsIpgoUpdateService;
 import springbootmvcshopping.service.goodsIpgo.GoodsIpgoWriteService;
 
 @Controller
@@ -27,6 +28,9 @@ public class GoodsIpgoController {
 
     @Autowired
     GoodsIpgoDetailService goodsIpgoDetailService;
+
+    @Autowired
+    GoodsIpgoUpdateService goodsIpgoUpdateService;
 
     @GetMapping("goodsIpgoList")
     public String goodsIpgoList(Model model) {
@@ -51,6 +55,18 @@ public class GoodsIpgoController {
     public String goodsIpgoDetail(@PathVariable("goodsIpgoNum") String goodsIpgoNum, Model model) {
         goodsIpgoDetailService.execute(goodsIpgoNum, model);
         return "thymeleaf/goodsIpgo/goodsIpgoDetail";
+    }
+
+    @GetMapping("ipgoUpdate/{goodsIpgoNum}")
+    public String goodsIpgoUpdate(@PathVariable("goodsIpgoNum") String goodsIpgoNum, Model model) {
+        goodsIpgoDetailService.execute(goodsIpgoNum, model);
+        return "thymeleaf/goodsIpgo/goodsIpgoUpdate";
+    }
+
+    @PostMapping("goodsIpgoModify")
+    public String goodsIpgoModify(GoodsIpgoCommand goodsIpgoCommand, HttpSession session) {
+        goodsIpgoUpdateService.execute(goodsIpgoCommand, session);
+        return "redirect:goodsIpgoList";
     }
 
 }

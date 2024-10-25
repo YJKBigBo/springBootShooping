@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface GoodsIpgoMapper {
     public List<GoodsIpgoDTO> goodsIpgoSelectAll();
-    public void goodsIpgoInsert(GoodsIpgoDTO goodsIpgo);
+    public void goodsIpgoInsert(GoodsIpgoDTO goodsIpgoDTO);
     public GoodsIpgoDTO goodsIpgoSelectOne(String goodsIpgoNum);
+    public void goodsIpgoUpdate(GoodsIpgoDTO goodsIpgoDTO);
 }

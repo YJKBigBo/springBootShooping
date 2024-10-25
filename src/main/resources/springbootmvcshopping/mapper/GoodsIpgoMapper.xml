@@ -18,4 +18,8 @@
     <select id="goodsIpgoSelectOne" parameterType="string">
         select <include refid="IpgoColumn"></include> from goods_ipgo where IPGO_NUM = #{ipgoNum}
     </select>
+
+    <update id="goodsIpgoUpdate" parameterType="GoodsIpgoDTO">
+        update goods_ipgo set Ipgo_qty = #{ipgoQty}, ipgo_date = #{ipgoDate}, made_date = #{madeDate}, ipgo_price = #{ipgoPrice}, emp_num = #{empNum} where IPGO_NUM = #{ipgoNum}
+    </update>
 </mapper>
