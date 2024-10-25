@@ -16,11 +16,11 @@ public class GoodsIpgoWriteService {
     @Autowired
     GoodsIpgoMapper goodsIpgoMapper;
 
-    public void execute(GoodsIpgoCommand goodsIpgoCommand, String goodsNum, HttpSession session, String goodsIpgoNum){
+    public void execute(GoodsIpgoCommand goodsIpgoCommand, HttpSession session, String goodsIpgoNum){
         AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
         String empNum = auth.getUserNum();
         GoodsIpgoDTO dto = new GoodsIpgoDTO();
-        dto.setGoodsNum(goodsNum);
+        dto.setGoodsNum(goodsIpgoCommand.getGoodsNum());
         dto.setIpgoQty(goodsIpgoCommand.getIpgoQty());
         dto.setIpgoDate(goodsIpgoCommand.getIpgoDate());
         dto.setMadeDate(goodsIpgoCommand.getMadeDate());

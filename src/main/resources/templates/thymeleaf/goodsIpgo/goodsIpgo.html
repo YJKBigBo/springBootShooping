@@ -9,14 +9,26 @@
 <ul>
     <li><a href="goodsIpgoList">상품 입고 현황</a></li>
 </ul>
-상품입고 <br />
-<form action="ipgoRegist" method="post">
-    <button type="button" id="btn" >상품 검색</button><br />
-    입고일 : <input type="date" name= "ipgoDate" /><br />
-    입고 수량 : <input type="number" name= "ipgoQty" /><br />
-    제조일 : <input type="datetime-local" name= "madeDate" /><br />
-    가격 :  <input type="number" name= "ipgoPrice" /><br />
-    <input type="submit" value="입고 등록" />
+<form action="../ipgoRegist" method="post">
+    <table border = "1" width ="600" align="center">
+
+        <input type="hidden" name="goodsNum" th:value="${goodsNum}"/>
+
+        <tr><th>입고일</th>
+            <td><input type="date" name= "ipgoDate" /></td></tr>
+        <tr><th>입고 수량</th>
+            <td><input type="number" name= "ipgoQty" /></td></tr>
+
+        <tr>
+            <th>제조일</th>
+            <td><input type="date" name= "madeDate" /></td>
+        </tr>
+        <tr>
+            <th>가격</th>
+            <td><input type="number" name= "ipgoPrice" /></td>
+        </tr>
+        <input type="submit" id="btn" value="입고등록" />
+    </table>
 </form>
 </body>
 </html>
