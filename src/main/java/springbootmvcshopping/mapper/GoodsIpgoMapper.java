@@ -11,4 +11,5 @@ public interface GoodsIpgoMapper {
     public void goodsIpgoInsert(GoodsIpgoDTO goodsIpgoDTO);
     public GoodsIpgoDTO goodsIpgoSelectOne(String goodsIpgoNum);
     public void goodsIpgoUpdate(GoodsIpgoDTO goodsIpgoDTO);
+    public void goodsIpgoDelete(String goodsIpgoNum);
 }

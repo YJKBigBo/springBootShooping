@@ -22,4 +22,8 @@
     <update id="goodsIpgoUpdate" parameterType="GoodsIpgoDTO">
         update goods_ipgo set Ipgo_qty = #{ipgoQty}, ipgo_date = #{ipgoDate}, made_date = #{madeDate}, ipgo_price = #{ipgoPrice}, emp_num = #{empNum} where IPGO_NUM = #{ipgoNum}
     </update>
+
+    <delete id="goodsIpgoDelete" parameterType="string">
+        delete from goods_ipgo where IPGO_NUM = #{ipgoNum}
+    </delete>
 </mapper>

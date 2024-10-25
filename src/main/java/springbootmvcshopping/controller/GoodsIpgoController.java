@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import springbootmvcshopping.command.GoodsIpgoCommand;
 import springbootmvcshopping.domain.AuthInfoDTO;
 import springbootmvcshopping.service.AutoNumService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoDetailService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoListService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoUpdateService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoWriteService;
+import springbootmvcshopping.service.goodsIpgo.*;
 
 @Controller
 @RequestMapping("goodsIpgo")
@@ -31,6 +28,9 @@ public class GoodsIpgoController {
 
     @Autowired
     GoodsIpgoUpdateService goodsIpgoUpdateService;
+
+    @Autowired
+    GoodsIpgoDeleteService goodsIpgoDeleteService;
 
     @GetMapping("goodsIpgoList")
     public String goodsIpgoList(Model model) {
@@ -68,5 +68,12 @@ public class GoodsIpgoController {
         goodsIpgoUpdateService.execute(goodsIpgoCommand, session);
         return "redirect:goodsIpgoList";
     }
+
+    @GetMapping("ipgoDelete/{goodsIpgoNum}")
+    public String goodsIpgoDelete(@PathVariable("goodsIpgoNum") String goodsIpgoNum) {
+        goodsIpgoDeleteService.execute(goodsIpgoNum);
+        return "redirect:../goodsIpgoList";
+    }
+
 
 }
