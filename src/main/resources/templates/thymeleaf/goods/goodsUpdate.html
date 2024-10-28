@@ -8,20 +8,20 @@
     function fileDel(btn, orgFile, storeFile, kind){
       $.ajax({
         type:'post',
-        url:'fileDel',
+        url:'/file/fileDel',
         data:{"orgFile": orgFile , "storeFile" : storeFile},
         dataType:'text',
         success:function(result){
-          if(result == 1){
+          if(result == "1"){
             $(btn).text("삭제취소");
             if(kind == 'main'){
               $("#main").css("display","none");
-              $("#mainFile").css("display","");
+              $("#mainFile").css("display","block");
             }
           }else{
             $(btn).text("삭제");
             if(kind == 'main'){
-              $("#main").css("display","");
+              $("#main").css("display","block");
               $("#mainFile").css("display","none");
             }
           }
@@ -61,12 +61,12 @@
       <td><input type="date" name="goodsUpdateDate" th:value="${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}" readonly="readonly"></td></tr>
     <tr><th>대문이미지</th>
       <td><input type="file" name="goodsMainImage" id="mainFile" style="display:none"/>
-        [[${goodsCommand.goodsMainImage}]]<button type="button">삭제</button>
+        <span id="main">[[${goodsCommand.goodsMainImage}]]</span><button type="button" th:attr="onclick=|javascript:fileDel(this, '${goodsCommand.goodsMainImage}', '${goodsCommand.goodsMainStoreImage}', 'main');|">삭제</button>
       </td>
     </tr>
     <tr><th>이미지</th>
-      <td><div th:each="image : ${#strings.arraySplit(goodsCommand.goodsDetailImage,'/')}">
-        [[${image}]]<button type="button">삭제</button>
+      <td><div th:each="image, idx : ${#strings.arraySplit(goodsCommand.goodsDetailImage,'[`/]')}">
+        [[${image}]]<button type="button" th:attr="onclick=|fileDel(this, '${image}', '${#strings.arraySplit(goodsCommand.goodsDetailStoreImage,'[`/]')[idx.index]}');|">삭제</button>
       </div>
 
         <input type="file" name="goodsDetailImage" multiple="multiple" /></td>
