@@ -71,6 +71,8 @@ public class GoodsController {
 
     @PostMapping("goodsUpdate")
     public String goodsUpdate(GoodsCommand goodsCommand, HttpSession session) {
+        //세션이 계속 유지되면 삭제할 파일 정보를 계속 가지고 있기 때문에 세션을 한번 삭제 시켜줘야 한다.
+        session.removeAttribute("fileList");
         goodsUpdateService.execute(goodsCommand, session);
         return "redirect:goodsList";
     }

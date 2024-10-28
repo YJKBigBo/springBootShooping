@@ -73,7 +73,7 @@
     </select>
 
     <update id="goodsUpdate" parameterType="GoodsDTO">
-        update goods set goods_name = #{goodsName}, goods_price = #{goodsPrice}, goods_Contents = #{goodsContents}, visit_count = #{visitCount}, UPDATE_EMP_NUM = #{updateEmpNum}, GOODS_UPDATE_DATE = sysdate where goods_num = #{goodsNum}
+        update goods <trim prefix="set" suffixOverrides=","> goods_name = #{goodsName}, goods_price = #{goodsPrice}, goods_Contents = #{goodsContents}, visit_count = #{visitCount}, UPDATE_EMP_NUM = #{updateEmpNum}, GOODS_UPDATE_DATE = sysdate, <if test="goodsMainImage != null"> goods_main_image = #{goodsMainImage}, goods_main_store_image = #{goodsMainStoreImage}</if> <if test="goodsDetailImage != null"> , goods_detail_image = #{goodsDetailImage}, goods_detail_store_image = #{goodsDetailStoreImage}</if></trim> where goods_num = #{goodsNum}
     </update>
 
     <delete id="goodsDelete" parameterType="string">
