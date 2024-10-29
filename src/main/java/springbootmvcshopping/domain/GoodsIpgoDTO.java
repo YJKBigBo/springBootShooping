@@ -1,20 +1,21 @@
 package springbootmvcshopping.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.Alias;
-
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Alias("GoodsIpgoDTO")
+import org.apache.ibatis.type.Alias;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class GoodsIpgoDTO {
+@Alias("goodsIpgo")
+@AllArgsConstructor //생성자
+@NoArgsConstructor // 디펄트 생성자
+public class GoodsIpgoDTO { // 디비에 있는 table의 컬럼명과 같아야 한다.
+    String goodsIpgoNum;
     String goodsNum;
-    String ipgoNum;
     Integer ipgoQty;
     Date ipgoDate;
     Timestamp madeDate;

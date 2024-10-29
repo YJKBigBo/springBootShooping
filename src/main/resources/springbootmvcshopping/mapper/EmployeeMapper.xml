@@ -38,4 +38,9 @@
         where emp_num = #{empNum}
     </update>
 
+    <select id="getEmpNum" parameterType="string" resultType="string">
+        select emp_num from employees
+        where emp_id = #{empId}
+    </select>
+
 </mapper>

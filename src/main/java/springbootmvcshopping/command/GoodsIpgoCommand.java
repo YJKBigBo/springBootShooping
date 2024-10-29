@@ -1,21 +1,19 @@
 package springbootmvcshopping.command;
 
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.annotation.Validated;
-
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
 @Data
 public class GoodsIpgoCommand {
+    String goodsIpgoNum;
     String goodsNum;
-    String ipgoNum;
     Integer ipgoQty;
+    Integer ipgoPrice;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date ipgoDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) //pattern 사용해도 무관
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     LocalDateTime madeDate;
-    Integer ipgoPrice;
-    String empNum;
 }

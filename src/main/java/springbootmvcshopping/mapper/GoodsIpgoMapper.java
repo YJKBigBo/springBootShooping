@@ -1,15 +1,20 @@
 package springbootmvcshopping.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import springbootmvcshopping.domain.GoodsIpgoDTO;
-
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import springbootmvcshopping.domain.GoodsIpgoDTO;
+import springbootmvcshopping.domain.GoodsIpgoGoodsNameDTO;
 
 @Mapper
 public interface GoodsIpgoMapper {
-    public List<GoodsIpgoDTO> goodsIpgoSelectAll();
-    public void goodsIpgoInsert(GoodsIpgoDTO goodsIpgoDTO);
-    public GoodsIpgoDTO goodsIpgoSelectOne(String goodsIpgoNum);
-    public void goodsIpgoUpdate(GoodsIpgoDTO goodsIpgoDTO);
-    public void goodsIpgoDelete(String goodsIpgoNum);
+    public int goodsIpgoInsert(GoodsIpgoDTO dto);
+    public List<GoodsIpgoDTO> goodsIpgoSelectList();
+    public GoodsIpgoGoodsNameDTO ipgoGoodsSelectOne(
+            @Param(value = "ipgoNum") String ipgoNum,
+            @Param(value = "goodsNum" ) String goodsNum);
+    public void goodsIpgoUpdate(GoodsIpgoDTO dto);
+    public void ipgoGoodsNumDelete(String ipgoNumNgoodsNum);
 }

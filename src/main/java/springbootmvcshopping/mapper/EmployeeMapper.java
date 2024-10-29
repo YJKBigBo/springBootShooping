@@ -13,4 +13,6 @@ public interface EmployeeMapper {
     public void employeeInsert(EmployeeDTO employeeDTO);
     public EmployeeDTO employeeSelectOne(String empNum);
     public void employeeUpdate(EmployeeDTO employeeDTO);
+
+    public String getEmpNum(String empId);
 }

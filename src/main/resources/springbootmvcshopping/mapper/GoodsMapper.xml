@@ -94,4 +94,14 @@
             from goods)
         where rn between #{startRow} and #{endRow}
     </select>
+
+    <select id="goodsCounts" parameterType="string" resultType="integer">
+        select count(*) from goods
+        <where>
+            <if test="searchWord != null">
+                goods_name like '%' || #{searchWord} || '%'
+                or goods_num like '%' || #{searchWord} || '%'
+            </if>
+        </where>
+    </select>
 </mapper>

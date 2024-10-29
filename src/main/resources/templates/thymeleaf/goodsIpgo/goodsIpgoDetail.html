@@ -2,16 +2,56 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>ipgoDetail.html</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $.ajax({
+                type:"post",
+                url:"../goodsIpgoDetail",
+                data:{"ipgoNum": "[[${ipgoNum}]]", "goodsNum": "[[${goodsNum}]]"},
+                success:function(dto){
+                    var ipgoDate = new Date(dto.GoodsIpgoDTO.ipgoDate);
+                    var ipgoYear = ipgoDate.getFullYear();
+                    var ipgoMonth = ("0"+(ipgoDate.getMonth() + 1)).slice(-2);
+                    var ipgoDay = ("0"+ ipgoDate.getDate()).slice(-2);
+
+                    var madeDate = new Date(dto.GoodsIpgoDTO.madeDate);
+                    var madeYear = madeDate.getFullYear();
+                    var madeMonth = ("0"+(madeDate.getMonth() + 1)).slice(-2);
+                    var madeDay = ("0"+ madeDate.getDate()).slice(-2);
+                    var madeHours = madeDate.getHours();
+                    var madeMinutes = madeDate.getMinutes();
+
+                    var item="";
+                    item += "입고번호: " + dto.GoodsIpgoDTO.ipgoNum + "<br>";
+                    item += "상품번호: " + dto.GoodsIpgoDTO.goodsNum + "<br>";
+                    item += "상품이름: " + dto.goodsName + "<br>";
+                    item += "입고일: " + ipgoYear + '-' +ipgoMonth + '-' + ipgoDay + "<br>";
+                    item += "입고수량: " + dto.GoodsIpgoDTO.ipgoQty + "<br>";
+                    item += "제조일자: " + madeYear + '-' +madeMonth + '-'+madeDay + ' ' + madeHours + '-' + madeMinutes +"<br>";
+                    item += "입고가격: " + dto.GoodsIpgoDTO.ipgoPrice + "원 <br>";
+                    item += "<button type='button' onclick=\'ipgoUpdate(' + dto.GoodsIpgoDTO.ipgoNum";
+                    item +=                                             ',' + dto.GoodsIpgoDTO.goodsNum +')\'>';
+                    $("#detail").html(item);
+                },
+                error:function(){
+                    alert("서버오류");
+                }
+
+            });
+        });
+
+        function ipgoUpdate(ipgoNum, goodsNum){
+            location.href="goodsIpgoUpdate?ipgoNum=" + ipgoNum + "&goodsNum=" + goodsNum;
+        }
+
+        function ipgoDelete(ipgoNum, goodsNum){
+            location.href="goodsIpgoDelete?ipgoNum=" + ipgoNum + "-" + goodsNum;
+        }
+    </script>
+</head>
 <body>
-입고번호 : [[${goodsIpgoCommand.ipgoNum}]]<br />
-상품번호 : [[${goodsIpgoCommand.goodsNum}]]<br />
-입고일 : [[${goodsIpgoCommand.ipgoDate}]]<br />
-입고 수량 : [[${goodsIpgoCommand.ipgoQty}]]<br />
-제조일 : [[${goodsIpgoCommand.madeDate}]]<br />
-가격 : [[${goodsIpgoCommand.ipgoPrice}]]<br />
-등록한 사원 : [[${goodsIpgoCommand.empNum}]]<br />
-<a th:href="|../ipgoUpdate/${goodsIpgoCommand.ipgoNum}|">입고 수정</a> |
-<a th:href="|../ipgoDelete/${goodsIpgoCommand.ipgoNum}|">입고 삭제</a>
+<div id="detail"></div>
 </body>
 </html>
