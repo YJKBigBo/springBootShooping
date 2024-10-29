@@ -87,4 +87,11 @@
     <select id="goodsName" parameterType="string">
         select goods_name where goodsNum = #{goodsNum}
     </select>
+
+    <select id="goodsSelectList" resultMap="goodsResultMap">
+        select * from
+            (select rownum rn, GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, EMP_NUM, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE, GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE, GOODS_REGIST_DATE, UPDATE_EMP_NUM, GOODS_UPDATE_DATE
+            from goods)
+        where rn between #{startRow} and #{endRow}
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package springbootmvcshopping.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import springbootmvcshopping.domain.GoodsDTO;
 import springbootmvcshopping.domain.StartEndPageDTO;
 
@@ -15,4 +16,5 @@ public interface GoodsMapper {
     public int goodsDelete(String[] goodsNum);
     public int goodsCount();
     public String goodsName(String goodsNum);
+    public List<GoodsDTO> goodsSelectList(@Param("startRow") int startRow, @Param("endRow") int endRow);
 }
