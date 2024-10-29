@@ -100,22 +100,24 @@ public class GoodsUpdateService {
         //session에 있는 정보를 디비로 부터 제거
         //배열을 리스트로 받아옴
         //만약 DB에 사진이 3개 있고 수정해서 1개만 한다면 배열은 "사진이름//"로 저장되기 때문에
-        List<String> dbOrg = new ArrayList<>(Arrays.asList(goodsDTO.getGoodsDetailImage().split("[/`]")));
-        List<String> dbStore = new ArrayList<>(Arrays.asList(goodsDTO.getGoodsDetailStoreImage().split("[/`]")));
-        //session에 있는 데이터를 DB와 비교해서 디비에 있는 데이터를 삭제
-        if(list != null){
-            for(FileDTO fdto : list){
-                for(String img : dbOrg){
-                    if(fdto.getOrgFile().equals(img)){
-                        dbOrg.remove(fdto.getOrgFile());
-                        dbStore.remove(fdto.getStoreFile());
-                        break;
+        if(goodsCommand.getGoodsDetailImage() != null){
+            List<String> dbOrg = new ArrayList<>(Arrays.asList(goodsDTO.getGoodsDetailImage().split("[/`]")));
+            List<String> dbStore = new ArrayList<>(Arrays.asList(goodsDTO.getGoodsDetailStoreImage().split("[/`]")));
+            //session에 있는 데이터를 DB와 비교해서 디비에 있는 데이터를 삭제
+            if(list != null){
+                for(FileDTO fdto : list){
+                    for(String img : dbOrg){
+                        if(fdto.getOrgFile().equals(img)){
+                            dbOrg.remove(fdto.getOrgFile());
+                            dbStore.remove(fdto.getStoreFile());
+                            break;
+                        }
                     }
                 }
             }
+            for(String img : dbOrg) originalTotal += img +"/";
+            for(String img : dbStore) storeTotal += img +"/";
         }
-        for(String img : dbOrg) originalTotal += img +"/";
-        for(String img : dbStore) storeTotal += img +"/";
 
         dto.setGoodsDetailStoreImage(storeTotal);
         dto.setGoodsDetailImage(originalTotal);
