@@ -11,7 +11,7 @@ import springbootmvcshopping.service.AutoNumService;
 import springbootmvcshopping.service.goodsIpgo.*;
 
 @Controller
-@RequestMapping("goodsIpgo")
+@RequestMapping("goods")
 public class GoodsIpgoController {
 
     @Autowired
@@ -44,11 +44,12 @@ public class GoodsIpgoController {
         return "thymeleaf/goodsIpgo/goodsIpgo";
     }
 
+    @ResponseBody
     @PostMapping("ipgoRegist")
     public String ipgoRegist(GoodsIpgoCommand goodsIpgoCommand, HttpSession session) {
         String goodsIpgoNum = autoNumService.execute("goodsIpgo_", "IPGO_NUM", 11, "goods_ipgo");
         goodsIpgoWriteService.execute(goodsIpgoCommand,  session, goodsIpgoNum);
-        return "redirect:goodsIpgoList";
+        return "200"; //csr 방식
     }
 
     @GetMapping("goodsIpgoDetail/{goodsIpgoNum}")

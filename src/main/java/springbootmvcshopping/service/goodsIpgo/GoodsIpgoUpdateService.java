@@ -8,6 +8,8 @@ import springbootmvcshopping.domain.AuthInfoDTO;
 import springbootmvcshopping.domain.GoodsIpgoDTO;
 import springbootmvcshopping.mapper.GoodsIpgoMapper;
 
+import java.sql.Timestamp;
+
 @Service
 public class GoodsIpgoUpdateService {
     @Autowired
@@ -23,7 +25,7 @@ public class GoodsIpgoUpdateService {
         dto.setIpgoPrice(goodsIpgoCommand.getIpgoPrice());
         dto.setIpgoQty(goodsIpgoCommand.getIpgoQty());
         dto.setIpgoDate(goodsIpgoCommand.getIpgoDate());
-        dto.setMadeDate(goodsIpgoCommand.getMadeDate());
+        dto.setMadeDate(Timestamp.valueOf(goodsIpgoCommand.getMadeDate()));
         dto.setEmpNum(empNum);
         dto.setGoodsNum(goodsIpgoCommand.getGoodsNum());
 

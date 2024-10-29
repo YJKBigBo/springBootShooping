@@ -7,7 +7,20 @@
         GOODS_NUM, IPGO_NUM, IPGO_QTY, IPGO_DATE, MADE_DATE, IPGO_PRICE, EMP_NUM
     </sql>
 
-    <select id="goodsIpgoSelectAll" resultType="GoodsIpgoDTO">
+    <!-- 생성자 이용 map 사용-->
+    <resultMap id="goodsIpgoResultMap" type="goodsIpgoDTO">
+        <constructor>
+            <idArg column="ipgo_num" javaType="string" />
+            <idArg column="goods_num" javaType="string" />
+            <arg column="ipgo_qty" javaType="integer" />
+            <arg column="ipgo_date" javaType="java.util.Date" />
+            <arg column="made_date" javaType="java.sql.Timestamp" />
+            <arg column="ipgo_price" javaType="integer" />
+            <arg column="emp_num" javaType="string" />
+        </constructor>
+    </resultMap>
+
+    <select id="goodsIpgoSelectAll" resultMap="goodsIpgoResultMap">
         select <include refid="IpgoColumn"></include> from goods_ipgo
     </select>
 

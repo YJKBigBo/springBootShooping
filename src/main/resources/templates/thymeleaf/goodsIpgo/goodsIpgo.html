@@ -3,31 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>goodsIpgo.jsp</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script type="text/javascript">
+        $("#regist").click(function (){
+            $("#frm").ajaxSubmit({ //csr방식
+                type : "POST",
+                url : "ipgoRegist",
+                beforeSubmit : function (){ //submit을 하기전 url로 이동하기전 유효성 검사 위해
+                    if($("#ipgoDate").val() == ""){
+                        alert("입고날을 입력해 주세요.");
+                        return false;
+                    }
+                    if($("#ipgoQty").val() == ""){
+                        alert("입고 수량을 입력해 주세요.");
+                        return false;
+                    }
+                    if($("#madeDate").val() == ""){
+                        alert("제조일을 입력해 주세요.");
+                        return false;
+                    }
+                    if($("#ipgoPrice").val() == ""){
+                        alert("입고 가격을 입력해 주세요.");
+                        return false;
+                    }
+                },
+                success : function (result){
+                    if(result == 200){
+                        location.href="goodsIpgoList";
+                    }
+                },
+                error : function (){
+                    alert("서버오류")
+                }
+            })
+        });
+    </script>
 </head>
 <body>
 <a href="/">홈</a>
 <ul>
     <li><a href="goodsIpgoList">상품 입고 현황</a></li>
 </ul>
-<form action="../ipgoRegist" method="post">
+<form action="../ipgoRegist" method="post" id="frm">
     <table border = "1" width ="600" align="center">
 
         <input type="hidden" name="goodsNum" th:value="${goodsNum}"/>
 
         <tr><th>입고일</th>
-            <td><input type="date" name= "ipgoDate" /></td></tr>
+            <td><input type="date" name= "ipgoDate" id="ipgoDate" /></td></tr>
         <tr><th>입고 수량</th>
-            <td><input type="number" name= "ipgoQty" /></td></tr>
+            <td><input type="number" name= "ipgoQty" id="ipgoQty" /></td></tr>
 
         <tr>
             <th>제조일</th>
-            <td><input type="date" name= "madeDate" /></td>
+            <td><input type="datetime-local" name="madeDate" id="madeDate" /></td>
         </tr>
         <tr>
             <th>가격</th>
-            <td><input type="number" name= "ipgoPrice" /></td>
+            <td><input type="number" name="ipgoPrice" id="ipgoPrice" value="0" min="0" max="100000" /></td>
         </tr>
-        <input type="submit" id="btn" value="입고등록" />
+<!--         <input type="submit" id="btn" value="입고등록" />-->
+        <input type="button" value="입고 등록" id="regist" />
+
     </table>
 </form>
 </body>
