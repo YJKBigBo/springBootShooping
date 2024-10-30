@@ -37,6 +37,7 @@
                     item += '</table>';
                     $("#content").append(item);
                     if(model.maxPage <= page )$("#load-more").css("display","none");
+                    if(model.maxPage == 0) page = 0;
                 }
             })
 
