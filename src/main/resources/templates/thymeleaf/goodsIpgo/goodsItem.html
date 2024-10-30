@@ -42,6 +42,7 @@
                 data: { search: searchTerm },
                 dataType: "json",
                 success: function(model) {
+                    console.log(model);
                     const filteredList = model.list.filter(dto => dto.goodsName.includes(searchTerm));
                     const totalItems = filteredList.length;
                     const totalPages = Math.ceil(totalItems / limit);
