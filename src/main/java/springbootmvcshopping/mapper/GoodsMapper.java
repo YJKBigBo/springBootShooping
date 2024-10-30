@@ -19,4 +19,6 @@ public interface GoodsMapper {
     public List<GoodsDTO> goodsSelectList(@Param("startRow") int startRow, @Param("endRow") int endRow);
 
     public int goodsCounts(String searchWord);
+
+    public List<GoodsDTO> goodsIpgoItems();
 }

@@ -104,4 +104,8 @@
             </if>
         </where>
     </select>
+
+    <select id="goodsIpgoItems" resultMap="goodsResultMap">
+        select <include refid="goodsColumn"></include> from goods
+    </select>
 </mapper>

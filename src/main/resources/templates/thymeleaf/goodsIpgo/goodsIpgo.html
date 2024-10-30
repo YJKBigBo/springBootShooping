@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -14,7 +13,18 @@
                 return false;
             }
         }
+
+        function dataForGoods(goodsNum, goodsName, goodsPrice) {
+            $("#goodsNum").val(goodsNum);
+            $("#goodsName").val(goodsName);
+            $("#goodsPrice").val(goodsPrice)
+        }
+
         $(function(){
+            $("#btn").click(function(){
+                window.open("goodsItem","상품검색"
+                    ,"width=620, height=500, left=30, top=50");
+            });
             /*
             $("#frm").submit(function(){
                 if($("#goodsNum").val() == ""){
@@ -89,6 +99,7 @@
         입고번호 : <input type="text" name= "goodsIpgoNum" id="goodsIpgoNum" th:value="${goodsIpgoCommand.goodsIpgoNum}"/>자동부여<br />
         상품번호 : <input type="text" name= "goodsNum" id="goodsNum" />
         <button type="button" id="btn" >상품 검색</button> <br />
+
         상품명 : <input type="text" name= "goodsName" id="goodsName" /><br />
         입고일 : <input type="date" name= "ipgoDate" id="ipgoDate" /><br />
         입고 수량 : <input type="number" name= "ipgoQty" id="ipgoQty" value="1" min="1" /><br />

@@ -14,15 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
 import springbootmvcshopping.command.GoodsIpgoCommand;
 import springbootmvcshopping.domain.GoodsIpgoGoodsNameDTO;
 import springbootmvcshopping.service.AutoNumService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoDeleteService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoDetailService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoListService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoService;
-import springbootmvcshopping.service.goodsIpgo.GoodsIpgoUpdateService;
-import springbootmvcshopping.service.goodsIpgo.GoodsItemService;
+import springbootmvcshopping.service.goodsIpgo.*;
 
 @Controller
 @RequestMapping("goods")
@@ -39,6 +35,8 @@ public class GoodsIpgoController {
     GoodsIpgoUpdateService goodsIpgoUpdateService;
     @Autowired
     AutoNumService autoNumService;
+    @Autowired
+    GoodsIpgoItemSearchService goodsIpgoItemSearchService;
 
 
     @Autowired
@@ -105,13 +103,6 @@ public class GoodsIpgoController {
         return "thymeleaf/goodsIpgo/goodsIpgo";
     }
 
-
-
-
-
-
-
-
     @GetMapping(value="goodsItem")
     public String goodsItem() {
         return "thymeleaf/goodsIpgo/goodsItem";
@@ -124,5 +115,13 @@ public class GoodsIpgoController {
     ){ //함수 중복은 일단 넘어가겠습니다.
         Map<String, Object> map = goodsItemService.execute(searchWord, page);
         return map;
+    }
+
+    @GetMapping("goodsIpgoItems")
+    public ModelAndView goodsIpgoItems(Model model) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("jsonView");
+        goodsIpgoItemSearchService.execute(model);
+        return mav;
     }
 }
