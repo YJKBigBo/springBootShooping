@@ -15,6 +15,7 @@ public class GoodsIpgoListService {
     GoodsIpgoMapper goodsIpgoMapper;
     public void execute(Model model) {
         List<GoodsIpgoDTO> list = goodsIpgoMapper.goodsIpgoSelectList();
+        System.out.println(list);
         model.addAttribute("list", list);
     }
 }
