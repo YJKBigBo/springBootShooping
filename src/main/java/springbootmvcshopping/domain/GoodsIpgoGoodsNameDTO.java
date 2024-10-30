@@ -4,7 +4,7 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @Data
-@Alias("goodsIpgoGoodsNameDTO")
+@Alias("goodsIpgoGoodsName")
 public class GoodsIpgoGoodsNameDTO {
     String goodsName;
     GoodsIpgoDTO goodsIpgoDTO;

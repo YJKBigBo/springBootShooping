@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="springBootMVCShopping.mapper.GoodsIpgoMapper">
+<mapper namespace="springbootmvcshopping.mapper.GoodsIpgoMapper">
     <sql id="baseColumns">
         IPGO_NUM , GOODS_NUM , IPGO_QTY , IPGO_DATE , MADE_DATE , ipgo_PRICE , EMP_NUM
     </sql>
@@ -62,4 +62,14 @@
         )
     </delete>
 </mapper>
+
+
+
+
+
+
+
+
+
+
 
