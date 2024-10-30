@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springbootmvcshopping.mapper.GoodsStockMapper">
+    <resultMap id="goodsStockResultMap" type="GoodsStockDTO">
+        <result column="stock" jdbcType="VARCHAR" property="stock"/>
+        <association property="goodsDTO" javaType="GoodsDTO">
+            <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum" />
+            <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+            <result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+            <result column="GOODS_CONTENTS" jdbcType="VARCHAR" property="goodsContents"/>
+            <result column="VISIT_COUNT" jdbcType="BIGINT" property="visitCount"/>
+            <result column="GOODS_MAIN_IMAGE" jdbcType="VARCHAR" property="goodsMainImage"/>
+            <result column="GOODS_MAIN_STORE_IMAGE" jdbcType="VARCHAR" property="goodsMainStoreImage"/>
+            <result column="GOODS_DETAIL_IMAGE" jdbcType="VARCHAR" property="goodsDetailImage"/>
+            <result column="GOODS_DETAIL_STORE_IMAGE" jdbcType="VARCHAR" property="goodsDetailStoreImage"/>
+            <result column="EMP_NUM" jdbcType="VARCHAR" property="empNum"/>
+            <result column="GOODS_REGIST_DATE" jdbcType="DATE" property="goodsRegistDate"/>
+            <result column="UPDATE_EMP_NUM" jdbcType="VARCHAR" property="updateEmpNum"/>
+            <result column="GOODS_UPDATE_DATE" jdbcType="DATE" property="goodsUpdateDate"/>
+        </association>
+    </resultMap>
+
+    <select id="goodsStockSelectOne" parameterType="string" resultMap="goodsStockResultMap">
+        select g.goods_num, goods_name, goods_price, goods_contents, emp_num, goods_regist_date, goods_main_image,
+               goods_main_store_image, goods_detail_image, goods_detail_store_image, visit_count,
+               update_emp_num, goods_update_date, stock
+        from goods g left outer join
+                (select ip.goods_num, ipqty - nvl(pqty,0) as stock from
+                    (select goods_num, sum(ipgo_qty) as ipqty from goods_ipgo group by goods_num)
+                    ip left outer join (select goods_num, sum(purchase_qty) pqty from purchase_list group by goods_num) pl
+                    on ip.goods_num = pl.goods_num) s
+                on g.goods_num = s.goods_num
+        where g.goods_num = #{goodsNum}
+
+    </select>
+</mapper>
