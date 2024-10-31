@@ -23,8 +23,9 @@ public class GoodsWishService {
         map.put("goodsNum", goodsNum);
         map.put("memberNum", memberNum);
 
-        goodsStockMapper.goodsWish(goodsNum, memberNum);
+        //goodsStockMapper.goodsWish(goodsNum, memberNum);
         goodsStockMapper.goodsMapWish(map);
     }
 
 }
+
