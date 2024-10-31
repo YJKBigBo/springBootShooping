@@ -28,18 +28,40 @@
                update_emp_num, goods_update_date, nvl(stock,0) stock
         from goods g
             left outer join
---                 재고
                 (select ip.goods_num, ipqty - nvl(pqty,0) as stock from
                     (select goods_num, sum(ipgo_qty) as ipqty from goods_ipgo group by goods_num) ip
                 left outer join
                     (select goods_num, sum(purchase_qty) pqty from purchase_list group by goods_num) pl
                 on ip.goods_num = pl.goods_num) s
---                 재고끝
             on g.goods_num = s.goods_num
         where g.goods_num = #{goodsNum}
     </select>
 
     <update id="goodsVisitCountUpdate" parameterType="string">
         update goods set visit_count = visit_count+1 where goods_num = #{goodsNum}
+    </update>
+
+    <update id="goodsWish" parameterType="string">
+        merge into wish w
+            using ( select goods_num from goods where goods_num = #{goods_num} ) g
+                on ( w.goods_num = g.goods_num and  member_num = #{memberNum} )
+                When MATCHED THEN
+                    update set WISH_DATE = sysdate
+                    delete where member_num = #{memberNum} and goods_num = #{goodsNum}
+                When not MATCHED THEN
+                    insert (MEMBER_NUM, GOODS_NUM , WISH_DATE )
+                    values( #{memberNum}, g.goods_num , sysdate)
+    </update>
+
+    <update id="goodsMapWish" parameterType="java.util.Map">
+        merge into wish w
+            using ( select goods_num from goods where goods_num = #{goods_num} ) g
+            on ( w.goods_num = g.goods_num and  member_num = #{memberNum} )
+            When MATCHED THEN
+                update set WISH_DATE = sysdate
+        delete where member_num = #{memberNum} and goods_num = #{goodsNum}
+            When not MATCHED THEN
+        insert (MEMBER_NUM, GOODS_NUM , WISH_DATE )
+        values( #{memberNum}, g.goods_num , sysdate)
     </update>
 </mapper>
