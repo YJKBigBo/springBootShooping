@@ -65,5 +65,8 @@
         values( #{memberNum}, g.goods_num , sysdate)
     </update>
 
+    <select id="goodsWishList" parameterType="string" resultType="WishDTO">
+        select MEMBER_NUM, GOODS_NUM, WISH_DATE from wish where member_num = #{memberNum}
+    </select>
 
 </mapper>

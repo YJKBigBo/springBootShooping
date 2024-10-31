@@ -64,6 +64,8 @@ hello miso shopping<br />
 
         <th:block th:if="${session.auth.grade == 'mem'}">
             <li><a href="myPage/memberMypage">내 정보 보기</a></li>
+            <li><a href="item/wishList" >관심 상품 보기</a></li>
+            <li><a href="item/bucketList">장바구니 보기</a></li>
         </th:block>
 
         <li><a href="login/logout">로그아웃</a></li>
