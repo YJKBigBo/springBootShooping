@@ -12,4 +12,5 @@ public interface GoodsStockMapper {
     public int goodsVisitCountUpdate(String goodsNum);
     public int goodsWish(@Param("goodsNum") String goodsNum, @Param("memberNum") String memberNum);
     public void goodsMapWish(Map<String, String> map);
+
 }

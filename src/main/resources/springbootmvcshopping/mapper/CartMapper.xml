@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springbootmvcshopping.mapper.CartMapper">
+    <update id="goodsCart" parameterType="string">
+        merge into cart c
+            using ( select goods_num from goods where goods_num = #{goodsNum} ) g
+            on ( c.goods_num = g.goods_num and member_num = #{memberNum} )
+            when matched then
+                update set cart_qty = cart_qty + #{cartQty}
+            when not matched then
+                insert (member_num, goods_num, cart_date, cart_qty) values (#{memberNum}, #{goodsNum}, sysdate, #{cartQty})
+    </update>
+</mapper>
