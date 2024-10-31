@@ -12,9 +12,10 @@ public class GoodsDetailViewService {
     GoodsStockMapper goodsStockMapper;
 
     public void execute(String goodsNum, Model model) {
+        goodsStockMapper.goodsVisitCountUpdate(goodsNum);
         GoodsStockDTO dto = goodsStockMapper.goodsStockSelectOne(goodsNum);
-
         model.addAttribute("dto", dto);
+
     }
 
 }

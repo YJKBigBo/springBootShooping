@@ -3,24 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/money.js"></script>
+    <script type="text/javascript">
+
+      $("#wish").click(function (){
+        $.ajax({
+          url : "wishItem",
+          type : "post",
+
+        })
+      })
+
+    </script>
 </head>
 <body>
 <table width="800" align="center">
-  <caption>${dto.goodsName } 상품정보입니다.</caption>
-  <tr><td rowspan="5"><img src="goods/upload/${dto.goodsMainImage }" height="200" /></td>
-    <td>${dto.goodsName }</td>
+  <caption>[[${dto.goodsDTO.goodsName }]] 상품정보입니다.</caption>
+  <tr><td rowspan="5"><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStoreImage}|" height="200" width="200"/></td>
+    <td>[[${dto.goodsDTO.goodsName }]]</td>
   </tr>
-  <tr><td>${dto.goodsPrice }</td></tr>
-  <tr><td>들여다본 수 : ${dto.visitCount }</td>
+  <tr><td>[[${dto.goodsDTO.goodsPrice }]]</td></tr>
+  <tr><td>들여다본 수 : [[${dto.goodsDTO.visitCount }]]</td>
   <tr><td>수량 : <input type="number" min="1" step="1" value="1" id="cartQty"/> </td></tr>
-  <tr><td><button type="button" id="cartBtn">장바구니</button> |
-    <button type="button" id="buyItem">바로구매 </button> |
-    <if test="${ empty isTrue }">
-      <img src="images/hart1.jpg" width="20" id="wish"/>
-    </if>
-    <if test="${!empty isTrue }">
-      <img src="images/hart.jpg" width="20" id="wishs"/>
-    </if>
+  <tr><td>
+    <th:block th:if="${dto.stock != 0 and dto.stock != null}">
+      <button type="button" id="cartBtn">장바구니</button> |
+      <button type="button" id="buyItem">바로구매 </button> |
+    </th:block>
+
+    <th:block th:if="${dto.stock == 0 or dto.stock == null}">
+      품절입니다.
+    </th:block>
+    <img src="/static/images/서머브리즈밀짚모자1.png" width="20" height="20" id="wish" />
+
     찜</td></tr>
   <tr><td colspan="2">
     <span id="descript">제품 상세 설명</span> |
