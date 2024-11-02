@@ -6,11 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import springbootmvcshopping.domain.CartDTO;
 import springbootmvcshopping.domain.WishDTO;
-import springbootmvcshopping.service.item.GoodsCartService;
-import springbootmvcshopping.service.item.GoodsDetailViewService;
-import springbootmvcshopping.service.item.GoodsWishService;
-import springbootmvcshopping.service.item.WishListService;
+import springbootmvcshopping.service.item.*;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +28,9 @@ public class ItemController {
 
     @Autowired
     WishListService wishListService;
+
+    @Autowired
+    BucketListService bucketListService;
 
     @GetMapping("detailView/{goodsNum}")
     public String goodsInfo(@PathVariable("goodsNum") String goodsNum, Model model)  {
@@ -63,6 +64,12 @@ public class ItemController {
     @GetMapping("bucketList")
     public String bucketList(){
         return "thymeleaf/item/bucketList";
+    }
+
+    @RequestMapping("bucket")
+    public @ResponseBody List<CartDTO> bucket(HttpSession session){
+        List<CartDTO> list = bucketListService.execute(session);
+        return list;
     }
 
 

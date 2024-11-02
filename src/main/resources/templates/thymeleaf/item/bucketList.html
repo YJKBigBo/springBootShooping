@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Title</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "get",
+                url: "bucket",
+                success: function (result) {
+                    console.log(result);
+                    let item = "<table align='center' border='1'><tr><th>상품 번호</th><th>멤버 번호</th><th>수량</th><th>상품 이름</th><th>상품 가격</th><th>상품 설명</th></tr>";
+                    $.each(result, function(idx, dto) {
+                        item += '<tr>';
+                        item += '<td>' + dto.goodsNum + '</td>';
+                        item += '<td>' + dto.memberNum + '</td>';
+                        item += '<td>' + dto.cartQty + '</td>';
+                        item += '<td>' + dto.goodsDTO.goodsName + '</td>';
+                        item += '<td>' + dto.goodsDTO.goodsPrice + '</td>';
+                        item += '<td>' + dto.goodsDTO.goodsContents + '</td>';
+                        item += '</tr>';
+                    });
+                    item += '</table>';
+
+                    $("#wishTable").html(item);
+                },
+                error: function () {
+                    alert("서버에러");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h3>장바구니 목록</h3>
+<div id="wishTable">
+</div>
+</body>
+</html>

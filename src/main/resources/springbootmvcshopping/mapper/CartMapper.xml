@@ -12,4 +12,41 @@
             when not matched then
                 insert (member_num, goods_num, cart_date, cart_qty) values (#{memberNum}, #{goodsNum}, sysdate, #{cartQty})
     </update>
+
+    <resultMap id="goodsCartListMap" type="CartDTO">
+        <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+        <id column="MEMBER_NUM" jdbcType="VARCHAR" property="memberNum"/>
+        <result column="CART_QTY" jdbcType="BIGINT" property="cartQty"/>
+        <result column="CART_DATE" jdbcType="DATE" property="cartDate"/>
+
+        <association property="goodsDTO" javaType="GoodsDTO">
+            <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum" />
+            <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+            <result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+            <result column="GOODS_CONTENTS" jdbcType="VARCHAR" property="goodsContents"/>
+            <result column="VISIT_COUNT" jdbcType="BIGINT" property="visitCount"/>
+            <result column="GOODS_MAIN_IMAGE" jdbcType="VARCHAR" property="goodsMainImage"/>
+            <result column="GOODS_MAIN_STORE_IMAGE" jdbcType="VARCHAR" property="goodsMainStoreImage"/>
+            <result column="GOODS_DETAIL_IMAGE" jdbcType="VARCHAR" property="goodsDetailImage"/>
+            <result column="GOODS_DETAIL_STORE_IMAGE" jdbcType="VARCHAR" property="goodsDetailStoreImage"/>
+            <result column="EMP_NUM" jdbcType="VARCHAR" property="empNum"/>
+            <result column="GOODS_REGIST_DATE" jdbcType="DATE" property="goodsRegistDate"/>
+            <result column="UPDATE_EMP_NUM" jdbcType="VARCHAR" property="updateEmpNum"/>
+            <result column="GOODS_UPDATE_DATE" jdbcType="DATE" property="goodsUpdateDate"/>
+        </association>
+    </resultMap>
+
+
+    <select id="cartList" parameterType="string" resultMap="goodsCartListMap">
+        SELECT
+            c.GOODS_NUM, c.MEMBER_NUM, CART_DATE, CART_QTY,
+            GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE,
+            GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE, EMP_NUM, GOODS_REGIST_DATE, UPDATE_EMP_NUM, GOODS_UPDATE_DATE
+        FROM
+            cart c
+                JOIN
+            goods g ON c.GOODS_NUM = g.GOODS_NUM
+        WHERE
+            c.MEMBER_NUM = #{memberNum}
+    </select>
 </mapper>
