@@ -41,17 +41,7 @@
         update goods set visit_count = visit_count+1 where goods_num = #{goodsNum}
     </update>
 
-    <update id="goodsWish" parameterType="string">
-        merge into wish w
-            using ( select goods_num from goods where goods_num = #{goods_num} ) g
-                on ( w.goods_num = g.goods_num and  member_num = #{memberNum} )
-                When MATCHED THEN
-                    update set WISH_DATE = sysdate
-                    delete where member_num = #{memberNum} and goods_num = #{goodsNum}
-                When not MATCHED THEN
-                    insert (MEMBER_NUM, GOODS_NUM , WISH_DATE )
-                    values( #{memberNum}, g.goods_num , sysdate)
-    </update>
+
 
     <update id="goodsMapWish" parameterType="java.util.Map">
         merge into wish w
@@ -65,8 +55,39 @@
         values( #{memberNum}, g.goods_num , sysdate)
     </update>
 
-    <select id="goodsWishList" parameterType="string" resultType="WishDTO">
-        select MEMBER_NUM, GOODS_NUM, WISH_DATE from wish where member_num = #{memberNum}
+    <resultMap id="goodsWishResultMap" type="wishDTO">
+        <id column="MEMBER_NUM" jdbcType="VARCHAR" property="memberNum"/>
+        <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+        <result column="WISH_DATE" jdbcType="DATE" property="wishDate"/>
+
+        <association property="goodsDTO" javaType="GoodsDTO">
+            <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum" />
+            <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+            <result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+            <result column="GOODS_CONTENTS" jdbcType="VARCHAR" property="goodsContents"/>
+            <result column="VISIT_COUNT" jdbcType="BIGINT" property="visitCount"/>
+            <result column="GOODS_MAIN_IMAGE" jdbcType="VARCHAR" property="goodsMainImage"/>
+            <result column="GOODS_MAIN_STORE_IMAGE" jdbcType="VARCHAR" property="goodsMainStoreImage"/>
+            <result column="GOODS_DETAIL_IMAGE" jdbcType="VARCHAR" property="goodsDetailImage"/>
+            <result column="GOODS_DETAIL_STORE_IMAGE" jdbcType="VARCHAR" property="goodsDetailStoreImage"/>
+            <result column="EMP_NUM" jdbcType="VARCHAR" property="empNum"/>
+            <result column="GOODS_REGIST_DATE" jdbcType="DATE" property="goodsRegistDate"/>
+            <result column="UPDATE_EMP_NUM" jdbcType="VARCHAR" property="updateEmpNum"/>
+            <result column="GOODS_UPDATE_DATE" jdbcType="DATE" property="goodsUpdateDate"/>
+        </association>
+    </resultMap>
+
+    <select id="goodsWishList" parameterType="string" resultMap="goodsWishResultMap">
+        SELECT
+            w.GOODS_NUM, w.MEMBER_NUM, WISH_DATE,
+            GOODS_NAME, GOODS_PRICE, GOODS_CONTENTS, VISIT_COUNT, GOODS_MAIN_IMAGE, GOODS_MAIN_STORE_IMAGE,
+            GOODS_DETAIL_IMAGE, GOODS_DETAIL_STORE_IMAGE, EMP_NUM, GOODS_REGIST_DATE, UPDATE_EMP_NUM, GOODS_UPDATE_DATE
+        FROM
+            wish w
+                JOIN
+            goods g ON w.GOODS_NUM = g.GOODS_NUM
+        WHERE
+            w.MEMBER_NUM = #{memberNum}
     </select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package springbootmvcshopping.service.item;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,20 @@ public class GoodsWishService {
         AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
         String memberNum = auth.getUserNum();
 
-        Map<String, String> map = new HashMap<String, String>();
+        if (goodsNum.startsWith("{") && goodsNum.contains("goodsNum")) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                Map<String, String> goodsMap = mapper.readValue(goodsNum, Map.class);
+                goodsNum = goodsMap.get("goodsNum");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Map<String, String> map = new HashMap<>();
         map.put("goodsNum", goodsNum);
         map.put("memberNum", memberNum);
 
-        //goodsStockMapper.goodsWish(goodsNum, memberNum);
         goodsStockMapper.goodsMapWish(map);
     }
 

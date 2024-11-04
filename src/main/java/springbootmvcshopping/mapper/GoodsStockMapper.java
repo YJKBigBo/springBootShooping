@@ -12,7 +12,6 @@ import java.util.Map;
 public interface GoodsStockMapper {
     public GoodsStockDTO goodsStockSelectOne(String goodsNum);
     public int goodsVisitCountUpdate(String goodsNum);
-    public int goodsWish(@Param("goodsNum") String goodsNum, @Param("memberNum") String memberNum);
     public void goodsMapWish(Map<String, String> map);
 
     public List<WishDTO> goodsWishList(String goodsNum);

@@ -11,4 +11,5 @@ public class WishDTO {
     String memberNum;
     String goodsNum;
     Date wishDate;
+    GoodsDTO goodsDTO;
 }
